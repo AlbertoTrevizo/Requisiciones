@@ -18,6 +18,7 @@ import requisiciones.panels.SignUp;
 public class Login extends javax.swing.JFrame {
     SignIn si = new SignIn();
     SignUp su = new SignUp();
+    Boolean pnlLogInActive = Boolean.TRUE;
 
     /**
      * Creates new form Login
@@ -25,7 +26,11 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         su.setBounds(0, 0, 460, 540);
+        su.setVisible(Boolean.FALSE);
+        si.setBounds(0, 0, 460, 540);
+        si.setVisible(Boolean.TRUE);
         pnlRight.add(su);
+        pnlRight.add(si);
     }
 
     /**
@@ -51,7 +56,7 @@ public class Login extends javax.swing.JFrame {
         pnlLeft.setBackground(new java.awt.Color(97, 212, 195));
         pnlLeft.setPreferredSize(new java.awt.Dimension(460, 540));
 
-        lblIcon.setIcon(new javax.swing.ImageIcon("/home/beto/Imágenes/user2.png")); // NOI18N
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/account_friend_human_man_member_person_profile_user_users-256.png"))); // NOI18N
         lblIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblIconMouseClicked(evt);
@@ -83,7 +88,7 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(pnlLeftLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +105,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         getContentPane().add(pnlLeft);
-        pnlLeft.setBounds(0, 0, 460, 540);
+        pnlLeft.setBounds(0, 0, 420, 540);
 
         pnlRight.setBackground(new java.awt.Color(36, 47, 65));
 
@@ -122,11 +127,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
-        // TODO add your handling code here:
-        pnlRight.removeAll();/*
-        su.setBounds(0, 0, 460, 540);
-        pnlRight.add(su);*/
-        JOptionPane.showMessageDialog(null, "iasdojf");
+        if (pnlLogInActive == Boolean.TRUE) {
+            su.setVisible(Boolean.TRUE);
+            si.setVisible(Boolean.FALSE);
+            pnlLogInActive = Boolean.FALSE;
+        }else{
+            si.setVisible(Boolean.TRUE);
+            su.setVisible(Boolean.FALSE);
+            pnlLogInActive = Boolean.TRUE;
+        }
     }//GEN-LAST:event_lblIconMouseClicked
 
     /**
