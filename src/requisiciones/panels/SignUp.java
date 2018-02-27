@@ -47,7 +47,7 @@ public class SignUp extends javax.swing.JPanel {
 
         lblConfirmPassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblConfirmPassword.setForeground(new java.awt.Color(204, 204, 204));
-        lblConfirmPassword.setText("CONFIRM PASSWORD");
+        lblConfirmPassword.setText("CONFIRMAR CONTRASEÑA");
 
         jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -58,7 +58,7 @@ public class SignUp extends javax.swing.JPanel {
         chbAgree.setBackground(new java.awt.Color(36, 47, 65));
         chbAgree.setForeground(new java.awt.Color(255, 255, 255));
         chbAgree.setSelected(true);
-        chbAgree.setText("I agree all terms of service");
+        chbAgree.setText("Acepto los terminos y condiciones");
         chbAgree.setBorder(null);
         chbAgree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +79,7 @@ public class SignUp extends javax.swing.JPanel {
 
         lblPassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(204, 204, 204));
-        lblPassword.setText("PASSWORD");
+        lblPassword.setText("CONTRASEÑA");
 
         txtPassword.setBackground(new java.awt.Color(36, 47, 65));
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,7 +94,7 @@ public class SignUp extends javax.swing.JPanel {
         txtEmail.setBackground(new java.awt.Color(36, 47, 65));
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
-        txtEmail.setText("Your email here");
+        txtEmail.setText("ejemplo@ejemplo.com");
         txtEmail.setBorder(null);
         txtEmail.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -110,7 +110,7 @@ public class SignUp extends javax.swing.JPanel {
 
         lblName.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblName.setForeground(new java.awt.Color(204, 204, 204));
-        lblName.setText("FULL NAME");
+        lblName.setText("NOMBRE");
 
         pnlBtnSignUp.setBackground(new java.awt.Color(97, 212, 195));
         pnlBtnSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -118,21 +118,22 @@ public class SignUp extends javax.swing.JPanel {
                 pnlBtnSignUpMouseClicked(evt);
             }
         });
-        pnlBtnSignUp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlBtnSignUp.setLayout(null);
 
         lblSignUp.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblSignUp.setForeground(new java.awt.Color(204, 204, 204));
-        lblSignUp.setText("Sign Up");
+        lblSignUp.setForeground(new java.awt.Color(36, 47, 65));
+        lblSignUp.setText("REGISTRARME");
         lblSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSignUpMouseClicked(evt);
             }
         });
-        pnlBtnSignUp.add(lblSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        pnlBtnSignUp.add(lblSignUp);
+        lblSignUp.setBounds(20, 10, 110, 17);
 
         lblEmail.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(204, 204, 204));
-        lblEmail.setText("EMAIL");
+        lblEmail.setText("CORREO ELECTRONICO");
 
         txtConfirmPassword.setBackground(new java.awt.Color(36, 47, 65));
         txtConfirmPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,6 +163,10 @@ public class SignUp extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblConfirmPassword)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword)
                     .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,10 +178,6 @@ public class SignUp extends javax.swing.JPanel {
                         .addComponent(lblName)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPassword)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblConfirmPassword)
                         .addComponent(lblEmail)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(chbAgree))
@@ -185,11 +186,19 @@ public class SignUp extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
+                .addContainerGap(134, Short.MAX_VALUE)
+                .addComponent(lblPassword)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(lblConfirmPassword)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(79, 79, 79)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addComponent(pnlBtnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,21 +211,13 @@ public class SignUp extends javax.swing.JPanel {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(lblPassword)
-                    .addGap(13, 13, 13)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(lblConfirmPassword)
-                    .addGap(63, 63, 63)
+                    .addGap(190, 190, 190)
                     .addComponent(lblEmail)
                     .addGap(3, 3, 3)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(40, 40, 40)
                     .addComponent(chbAgree)
-                    .addContainerGap(120, Short.MAX_VALUE)))
+                    .addContainerGap(119, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

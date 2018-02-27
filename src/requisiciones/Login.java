@@ -25,11 +25,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        su.setBounds(0, 0, 460, 540);
-        su.setVisible(Boolean.FALSE);
         si.setBounds(0, 0, 460, 540);
         si.setVisible(Boolean.TRUE);
-        pnlRight.add(su);
         pnlRight.add(si);
     }
 
@@ -56,12 +53,8 @@ public class Login extends javax.swing.JFrame {
         pnlLeft.setBackground(new java.awt.Color(97, 212, 195));
         pnlLeft.setPreferredSize(new java.awt.Dimension(460, 540));
 
-        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/account_friend_human_man_member_person_profile_user_users-256.png"))); // NOI18N
-        lblIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblIconMouseClicked(evt);
-            }
-        });
+        lblIcon.setBackground(new java.awt.Color(36, 47, 65));
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/user.png"))); // NOI18N
 
         lblTitle.setBackground(new java.awt.Color(36, 47, 65));
         lblTitle.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -78,30 +71,30 @@ public class Login extends javax.swing.JFrame {
             .addGroup(pnlLeftLayout.createSequentialGroup()
                 .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlLeftLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(lblIcon))
-                    .addGroup(pnlLeftLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTitle)
                             .addGroup(pnlLeftLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlLeftLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(lblIcon)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(lblTitle)
-                .addGap(67, 67, 67)
+                .addGap(45, 45, 45)
                 .addComponent(lblIcon)
-                .addGap(31, 31, 31)
+                .addGap(54, 54, 54)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlLeft);
@@ -125,18 +118,6 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
-        if (pnlLogInActive == Boolean.TRUE) {
-            su.setVisible(Boolean.TRUE);
-            si.setVisible(Boolean.FALSE);
-            pnlLogInActive = Boolean.FALSE;
-        }else{
-            si.setVisible(Boolean.TRUE);
-            su.setVisible(Boolean.FALSE);
-            pnlLogInActive = Boolean.TRUE;
-        }
-    }//GEN-LAST:event_lblIconMouseClicked
 
     /**
      * @param args the command line arguments

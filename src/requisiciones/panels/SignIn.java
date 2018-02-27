@@ -31,7 +31,7 @@ public class SignIn extends javax.swing.JPanel {
         jSeparator6 = new javax.swing.JSeparator();
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        pnlBtnSignUp = new javax.swing.JPanel();
+        pnlBtnSignIn = new javax.swing.JPanel();
         lblSignUp = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -44,7 +44,7 @@ public class SignIn extends javax.swing.JPanel {
 
         lblPassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(204, 204, 204));
-        lblPassword.setText("PASSWORD");
+        lblPassword.setText("CONTRASEÑA");
 
         txtPassword.setBackground(new java.awt.Color(36, 47, 65));
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,27 +56,27 @@ public class SignIn extends javax.swing.JPanel {
             }
         });
 
-        pnlBtnSignUp.setBackground(new java.awt.Color(97, 212, 195));
-        pnlBtnSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlBtnSignIn.setBackground(new java.awt.Color(97, 212, 195));
+        pnlBtnSignIn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlBtnSignUpMouseClicked(evt);
+                pnlBtnSignInMouseClicked(evt);
             }
         });
-        pnlBtnSignUp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlBtnSignIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSignUp.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblSignUp.setForeground(new java.awt.Color(204, 204, 204));
-        lblSignUp.setText("Sign In");
+        lblSignUp.setForeground(new java.awt.Color(36, 47, 65));
+        lblSignUp.setText("ENTRAR");
         lblSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSignUpMouseClicked(evt);
             }
         });
-        pnlBtnSignUp.add(lblSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        pnlBtnSignIn.add(lblSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         lblEmail.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(204, 204, 204));
-        lblEmail.setText("EMAIL");
+        lblEmail.setText("CORREO ELECTRONICO");
 
         txtEmail.setBackground(new java.awt.Color(36, 47, 65));
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -112,7 +112,7 @@ public class SignIn extends javax.swing.JPanel {
                             .addComponent(lblEmail)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(148, 148, 148)
-                        .addComponent(pnlBtnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlBtnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -131,7 +131,7 @@ public class SignIn extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(pnlBtnSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlBtnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(129, 129, 129))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -145,9 +145,9 @@ public class SignIn extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblSignUpMouseClicked
 
-    private void pnlBtnSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBtnSignUpMouseClicked
+    private void pnlBtnSignInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBtnSignInMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_pnlBtnSignUpMouseClicked
+    }//GEN-LAST:event_pnlBtnSignInMouseClicked
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
         // TODO add your handling code here:
@@ -165,7 +165,7 @@ public class SignIn extends javax.swing.JPanel {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblSignUp;
-    private javax.swing.JPanel pnlBtnSignUp;
+    private javax.swing.JPanel pnlBtnSignIn;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
