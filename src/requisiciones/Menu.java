@@ -20,7 +20,6 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         nombreUsuario=cone.ObtenerUsuario();
         lblUsuario.setText(nombreUsuario);
-        System.out.println("Holaaa");
     }
         
     /**
