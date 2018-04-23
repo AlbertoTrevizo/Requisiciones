@@ -5,20 +5,23 @@
  */
 package requisiciones;
 
+import BD.Conexion;
+
 /**
  *
  * @author User
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    public Conexion cone=new Conexion();
+    public String nombreUsuario;
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
+        nombreUsuario=cone.ObtenerUsuario();
+        lblUsuario.setText(nombreUsuario);
     }
-
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnRealizarReque = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
+        lblUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +67,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        lblUsuario.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,6 +81,10 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnRealizarReque)
                     .addComponent(btnProveedores))
                 .addContainerGap(508, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblUsuario)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +97,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnRealizarReque)
                 .addGap(18, 18, 18)
                 .addComponent(btnProveedores)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addComponent(lblUsuario)
+                .addContainerGap())
         );
 
         pack();
@@ -100,6 +112,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         new Productos().setVisible(true);
+        
      //   this.setVisible(false);
     }//GEN-LAST:event_btnProductosActionPerformed
 
@@ -153,5 +166,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRealizarReque;
     private javax.swing.JButton btnRequisiciones;
+    public javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }

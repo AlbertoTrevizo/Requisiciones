@@ -15,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RealizarRequisicion extends javax.swing.JFrame {
 
-    int i=0;
+    int i = 0;
     DefaultTableModel modelo = new DefaultTableModel();
     public Conexion consultas = new Conexion();
+    public double total = 0;
     /**
      * Creates new form RealizarRequisicion
      */
@@ -59,6 +60,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         txtUnidad = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
+        btnRequi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +130,13 @@ public class RealizarRequisicion extends javax.swing.JFrame {
 
         lblTotal.setText("$");
 
+        btnRequi.setText("Realizar Requisicion");
+        btnRequi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,33 +144,32 @@ public class RealizarRequisicion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel10))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtUnidad))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUnidad))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegresar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTotal)
-                        .addGap(106, 106, 106))))
+                        .addGap(171, 171, 171)
+                        .addComponent(btnRequi)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +204,8 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
-                    .addComponent(lblTotal))
+                    .addComponent(lblTotal)
+                    .addComponent(btnRequi))
                 .addGap(9, 9, 9))
         );
 
@@ -209,7 +218,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cantidad= JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
         String ID = txtCodigo.getText();
         String buscID;
 
@@ -229,32 +238,82 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUnidadMouseClicked
-        String cantidad= JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
         txtUnidad.setText(cantidad);
     }//GEN-LAST:event_txtUnidadMouseClicked
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        i=i+1;
+        i = i + 1;
+        int contar;
 
-        Object[] fila = new Object[7]; 
-        fila[0]=i;
-        fila[1]=txtCodigo.getText();
-        fila[2]=txtDescripcion.getText(); 
-        fila[3]="";
-        fila[4]=txtUnidad.getText();
-        fila[5]=txtPrecio.getText();
-        fila[6]=""+(Integer.parseInt(txtUnidad.getText())*Integer.parseInt(txtPrecio.getText()));
+        Object[] fila = new Object[7];
+        fila[0] = i;
+        fila[1] = txtCodigo.getText();
+        fila[2] = txtDescripcion.getText();
+        fila[3] = "";
+        fila[4] = txtUnidad.getText();
+        fila[5] = txtPrecio.getText();
+        fila[6] = "" + (Integer.parseInt(txtUnidad.getText()) * Integer.parseInt(txtPrecio.getText()));
         modelo.addRow(fila);
         tblRequisicion.setModel(modelo);
+
         
-        double total=0;
-        double valor=0;
+        double valor = 0;
+        total=0;
         for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
-           valor=Double.parseDouble(""+tblRequisicion.getValueAt(j, 6));
-           total=total+valor;
+            valor = Double.parseDouble("" + tblRequisicion.getValueAt(j, 6));
+            total = total + valor;
         }
-        lblTotal.setText(""+total);
+        lblTotal.setText("" + total);
+
+        contar = tblRequisicion.getRowCount();
+        System.out.println(contar + "");
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnRequiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequiActionPerformed
+        int Requisicion_ID,Usuario_ID,Proveedores_ID;
+        double Monto;
+        String FechaRequisicion,DetalleRequisicion,Estado;
+        
+        DetalleRequisicion = JOptionPane.showInputDialog(null, "Ingrese una nota a la requisicion");
+        System.out.println(DetalleRequisicion);
+
+        Requisicion_ID=consultas.requiID()+1;
+        Usuario_ID=0;
+        Proveedores_ID=2;
+        Monto=total;
+        FechaRequisicion="2018-04-13";
+        Estado="Activo";
+        
+        if(consultas.requisiciones(Requisicion_ID, Usuario_ID, 
+                Proveedores_ID, Monto, FechaRequisicion, DetalleRequisicion, Estado)==true){
+            JOptionPane.showMessageDialog(null, "La requisicion de realizo de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "La requisicion no se realizo de manera exitosa");
+        }
+        
+        int codigo, cantidad,item;
+        float costototal;
+        
+        for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
+            item=Integer.parseInt(""+tblRequisicion.getValueAt(j,0));
+            codigo = Integer.parseInt("" + tblRequisicion.getValueAt(j, 1));
+            cantidad = Integer.parseInt("" + tblRequisicion.getValueAt(j, 4));
+            costototal = Float.parseFloat("" + tblRequisicion.getValueAt(j, 6));
+           
+            if(consultas.productosrequisiciones(Requisicion_ID, Usuario_ID, codigo, cantidad, costototal)){
+                JOptionPane.showMessageDialog(null, "El articulo de la lista "+item+" fue agregado "
+                        + "correctamente a la requisicion");
+            }else{
+                JOptionPane.showMessageDialog(null, "El articulo de la lista "+item+" no fue agregado "
+                        + "correctamente a la requisicion");
+            }
+        }
+
+
+    }//GEN-LAST:event_btnRequiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +354,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnRequi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -20,7 +20,7 @@ public class Requisiciones extends javax.swing.JFrame {
     SignUp su = new SignUp();
     //Boolean pnlLogInActive = Boolean.TRUE;
     public Conexion cone=new Conexion();
-   
+    public String usuarioid;
     public Requisiciones() {
         initComponents();
         setLocationRelativeTo(null);
@@ -219,6 +219,7 @@ public class Requisiciones extends javax.swing.JFrame {
         if(inicio==true){
             this.setVisible(Boolean.FALSE);
             new Menu().setVisible(true);
+           
         }else{
             txtEmail.setText("");
             txtPassword.setText("");
