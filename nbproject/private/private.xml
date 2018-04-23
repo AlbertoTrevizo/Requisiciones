@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/Alberto_/Documents/NetBeansProjects/Requisiciones/src/requisiciones/Login.java</file>
-            <file>file:/C:/Users/Alberto_/Documents/NetBeansProjects/Requisiciones/src/requisiciones/panels/SignUp.java</file>
-            <file>file:/C:/Users/Alberto_/Documents/NetBeansProjects/Requisiciones/src/requisiciones/panels/SignIn.java</file>
-=======
-            <file>file:/home/beto/workspace/Requisiciones/src/requisiciones/panels/SignIn.java</file>
-            <file>file:/home/beto/workspace/Requisiciones/src/requisiciones/panels/SignUp.java</file>
-            <file>file:/home/beto/workspace/Requisiciones/src/requisiciones/Login.java</file>
->>>>>>> Stashed changes
+            <file>file:/C:/Users/User/Desktop/Requisiciones-master/src/BD/Conexion.java</file>
+            <file>file:/C:/Users/User/Desktop/Requisiciones-master/src/requisiciones/Menu.java</file>
+            <file>file:/C:/Users/User/Desktop/Requisiciones-master/src/requisiciones/Productos.java</file>
+            <file>file:/C:/Users/User/Desktop/Requisiciones-master/src/requisiciones/RealizarRequisicion.java</file>
         </group>
     </open-files>
 </project-private>
