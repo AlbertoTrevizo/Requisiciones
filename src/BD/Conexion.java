@@ -155,6 +155,19 @@ public class Conexion {
         return infor;
     }
 
+    public int consultaprove(){
+        int ID=0;
+           try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores order by Proveedores_ID desc limit 1")) {
+            while (rs.next()) {
+                ID = rs.getInt("Proveedores_ID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ID;
+        
+    }    
+    
     public boolean AgregarProducto(int Producto_ID, String nombre, String descripcion, int precio, int UnidadMedida, String categoria) {
         String insert;
         insert = "insert into Productos(Producto_ID,nombre,"
