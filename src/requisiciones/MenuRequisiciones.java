@@ -317,6 +317,7 @@ public class MenuRequisiciones extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lo sentimos la requisicion no pudo ser encontrada.");
         } else {
             Object datos[] = consultas.resultadosrequi(buscID);
+            lblFolio.setText(buscID);
             lblRequisitor.setText((String) datos[1]);
             lblProveedor.setText((String) datos[2]);
             lblTotal.setText((String) datos[3]);
@@ -326,7 +327,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         }
         tblRequisicion.removeAll();
         tblRequisicion.setModel(consultas.ProductosRequisicionesTbl(buscID));
-        System.out.println(buscID);
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 

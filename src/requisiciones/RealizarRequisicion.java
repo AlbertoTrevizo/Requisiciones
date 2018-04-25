@@ -19,6 +19,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     public Conexion consultas = new Conexion();
     public double total = 0;
+
     /**
      * Creates new form RealizarRequisicion
      */
@@ -218,96 +219,114 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
-        String ID = txtCodigo.getText();
-        String buscID;
-
-        buscID = consultas.consulta(ID);
-        if (buscID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+        String cantidad = null;
+        int comp;
+        cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        if (cantidad == null) {
         } else {
-            Object datos[] = consultas.resultados(ID);
-
-            txtNombre.setText((String) datos[1]);
-            txtDescripcion.setText((String) datos[2]);
-            txtPrecio.setText((String) datos[3]);
-            txtUnidad.setText((String) datos[4]);
-
+            comp = Integer.parseInt(cantidad);
+            if (comp <= 0) {
+                JOptionPane.showMessageDialog(null, "Cantidad invalida");
+            } else {
+                String ID = txtCodigo.getText();
+                String buscID;
+                buscID = consultas.consulta(ID);
+                if (buscID == null) {
+                    JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+                } else {
+                    Object datos[] = consultas.resultados(ID);
+                    txtNombre.setText((String) datos[1]);
+                    txtDescripcion.setText((String) datos[2]);
+                    txtPrecio.setText((String) datos[3]);
+                    txtUnidad.setText((String) datos[4]);
+                }
+                txtUnidad.setText(cantidad);
+            }
         }
-        txtUnidad.setText(cantidad);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUnidadMouseClicked
         String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
-        txtUnidad.setText(cantidad);
+        int comp;
+        if (cantidad == null) {
+        } else {
+            comp = Integer.parseInt(cantidad);
+            if (comp <= 0) {
+                JOptionPane.showMessageDialog(null, "Cantidad invalida");
+            } else {
+                txtUnidad.setText(cantidad);
+            }
+        }
     }//GEN-LAST:event_txtUnidadMouseClicked
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         i = i + 1;
-        int contar;
-
-        Object[] fila = new Object[7];
-        fila[0] = i;
-        fila[1] = txtCodigo.getText();
-        fila[2] = txtDescripcion.getText();
-        fila[3] = "";
-        fila[4] = txtUnidad.getText();
-        fila[5] = txtPrecio.getText();
-        fila[6] = "" + (Integer.parseInt(txtUnidad.getText()) * Integer.parseInt(txtPrecio.getText()));
-        modelo.addRow(fila);
-        tblRequisicion.setModel(modelo);
-
-        
-        double valor = 0;
-        total=0;
-        for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
-            valor = Double.parseDouble("" + tblRequisicion.getValueAt(j, 6));
-            total = total + valor;
+        if (i > 10) {
+            JOptionPane.showMessageDialog(null, "Se ha ingresado el maximo de articulos para una requisicion");
+        } else {
+            Object[] fila = new Object[7];
+            fila[0] = i;
+            fila[1] = txtCodigo.getText();
+            fila[2] = txtDescripcion.getText();
+            fila[3] = "";
+            fila[4] = txtUnidad.getText();
+            fila[5] = txtPrecio.getText();
+            fila[6] = "" + (Integer.parseInt(txtUnidad.getText()) * Integer.parseInt(txtPrecio.getText()));
+            modelo.addRow(fila);
+            tblRequisicion.setModel(modelo);
+            double valor;
+            total = 0;
+            for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
+                valor = Double.parseDouble("" + tblRequisicion.getValueAt(j, 6));
+                total = total + valor;
+            }
+            lblTotal.setText("" + total);
+            txtCodigo.setText("");
+            txtDescripcion.setText("");
+            txtUnidad.setText("");
+            txtPrecio.setText("");
+            txtNombre.setText("");
         }
-        lblTotal.setText("" + total);
-
-        contar = tblRequisicion.getRowCount();
-        System.out.println(contar + "");
 
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRequiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequiActionPerformed
-        int Requisicion_ID,Usuario_ID,Proveedores_ID;
+        int Requisicion_ID, Usuario_ID, Proveedores_ID;
         double Monto;
-        String FechaRequisicion,DetalleRequisicion,Estado;
-        
+        String FechaRequisicion, DetalleRequisicion, Estado;
+
         DetalleRequisicion = JOptionPane.showInputDialog(null, "Ingrese una nota a la requisicion");
         System.out.println(DetalleRequisicion);
 
-        Requisicion_ID=consultas.requiID()+1;
-        Usuario_ID=0;
-        Proveedores_ID=2;
-        Monto=total;
-        FechaRequisicion="2018-04-13";
-        Estado="Activo";
-        
-        if(consultas.requisiciones(Requisicion_ID, Usuario_ID, 
-                Proveedores_ID, Monto, FechaRequisicion, DetalleRequisicion, Estado)==true){
+        Requisicion_ID = consultas.requiID() + 1;
+        Usuario_ID = 0;
+        Proveedores_ID = 2;
+        Monto = total;
+        FechaRequisicion = "2018-04-13";
+        Estado = "Activo";
+
+        if (consultas.requisiciones(Requisicion_ID, Usuario_ID,
+                Proveedores_ID, Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {
             JOptionPane.showMessageDialog(null, "La requisicion de realizo de manera exitosa");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "La requisicion no se realizo de manera exitosa");
         }
-        
-        int codigo, cantidad,item;
+
+        int codigo, cantidad, item;
         float costototal;
-        
+
         for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
-            item=Integer.parseInt(""+tblRequisicion.getValueAt(j,0));
+            item = Integer.parseInt("" + tblRequisicion.getValueAt(j, 0));
             codigo = Integer.parseInt("" + tblRequisicion.getValueAt(j, 1));
             cantidad = Integer.parseInt("" + tblRequisicion.getValueAt(j, 4));
             costototal = Float.parseFloat("" + tblRequisicion.getValueAt(j, 6));
-           
-            if(consultas.productosrequisiciones(Requisicion_ID, Usuario_ID, codigo, cantidad, costototal)){
-                JOptionPane.showMessageDialog(null, "El articulo de la lista "+item+" fue agregado "
+
+            if (consultas.productosrequisiciones(Requisicion_ID, Usuario_ID, codigo, cantidad, costototal)) {
+                JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " fue agregado "
                         + "correctamente a la requisicion");
-            }else{
-                JOptionPane.showMessageDialog(null, "El articulo de la lista "+item+" no fue agregado "
+            } else {
+                JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " no fue agregado "
                         + "correctamente a la requisicion");
             }
         }
