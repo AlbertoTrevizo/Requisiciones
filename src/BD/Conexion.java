@@ -86,28 +86,30 @@ public class Conexion {
         model.addColumn("Item");
         model.addColumn("Codigo");
         model.addColumn("Descripcion");
-        model.addColumn("Observaciones");
+       // model.addColumn("Observaciones");
         model.addColumn("Cantidad");
         model.addColumn("Costo Unitario");
         model.addColumn("Costo Total");
 
-        try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID,Producto_ID,Cantidad,TotalArticulo,descripcion,precio"
-                + " FROM productosrequisiciones as PR join productos where Requisicion_ID=" + id+"and "
-                + "PR.Producto_ID=productos.Producto_ID")) {
+        try (ResultSet rs = st.executeQuery("SELECT t1.Requisicion_ID,t1.Producto_ID,t1.Cantidad,t1.TotalArticulo,"
+                + "t2.descripcion,t2.precio"
+                + " FROM productosrequisiciones as t1 inner join productos as t2 on Requisicion_ID=" + id+" and "
+                + "t1.Producto_ID=t2.Producto_ID")) {
             Object[] fila = new Object[7];
             while (rs.next()) {
-                fila[0] = i + 1;
-                String d = rs.getString("Producto_ID");
+                i=i+1;
+                fila[0] = i;
+                String d = rs.getString("t1.Producto_ID");
                 fila[1] = d;
-                String e = rs.getString("descripcion");
+                String e = rs.getString("t2.descripcion");
                 fila[2] = e;
-                String f = rs.getString("precio");
-                fila[3] = f;
-                String g = rs.getString("Cantidad");
-                fila[4] = g;
-                String h = rs.getString("TotalArticulo");
+                String g = rs.getString("t1.Cantidad");
+                fila[3] = g;
+                String f = rs.getString("t2.precio");
+                fila[4] = f;
+                String h = rs.getString("t1.TotalArticulo");
                 fila[5] = h;
-
+                model.addRow(fila);     
             }
 
         } catch (SQLException ex) {
