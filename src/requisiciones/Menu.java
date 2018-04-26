@@ -13,15 +13,14 @@ import BD.Conexion;
  */
 public class Menu extends javax.swing.JFrame {
 
-    public Conexion cone=new Conexion();
+    public Conexion cone = new Conexion();
     public String nombreUsuario;
+
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
-        nombreUsuario=cone.ObtenerUsuario();
-        lblUsuario.setText(nombreUsuario);
     }
-        
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +34,7 @@ public class Menu extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnRealizarReque = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
-        lblUsuario = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,7 +66,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        lblUsuario.setText("jLabel1");
+        btnCerrar.setText("Cerrar Sesion");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,30 +79,30 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRequisiciones)
-                    .addComponent(btnProductos)
-                    .addComponent(btnRealizarReque)
-                    .addComponent(btnProveedores))
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addComponent(btnRequisiciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProductos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRealizarReque)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblUsuario)
+                .addComponent(btnCerrar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(btnRequisiciones)
-                .addGap(18, 18, 18)
-                .addComponent(btnProductos)
-                .addGap(18, 18, 18)
-                .addComponent(btnRealizarReque)
-                .addGap(18, 18, 18)
-                .addComponent(btnProveedores)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addComponent(lblUsuario)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRequisiciones, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRealizarReque, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addComponent(btnCerrar)
                 .addContainerGap())
         );
 
@@ -112,8 +116,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         new Productos().setVisible(true);
-        
-     //   this.setVisible(false);
+
+        //   this.setVisible(false);
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnRealizarRequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarRequeActionPerformed
@@ -125,6 +129,11 @@ public class Menu extends javax.swing.JFrame {
         new Proveedores().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnProveedoresActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        setVisible(false);
+        new Requisiciones().setVisible(true);
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,10 +171,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnRealizarReque;
     private javax.swing.JButton btnRequisiciones;
-    public javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }

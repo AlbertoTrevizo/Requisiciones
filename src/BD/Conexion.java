@@ -66,7 +66,8 @@ public class Conexion {
         }
         return idbusc;
     }
-        public String consultPro(String id) {
+
+    public String consultPro(String id) {
         String idbusc = null;
         try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores where Proveedores_ID=" + id)) {
             while (rs.next()) {
@@ -77,7 +78,7 @@ public class Conexion {
         }
         return idbusc;
     }
-        
+
     public String consultarequi(String id) {
         String idbusc = null;
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID FROM requisiciones where Requisicion_ID=" + id)) {
@@ -96,18 +97,18 @@ public class Conexion {
         model.addColumn("Item");
         model.addColumn("Codigo");
         model.addColumn("Descripcion");
-       // model.addColumn("Observaciones");
+        // model.addColumn("Observaciones");
         model.addColumn("Cantidad");
         model.addColumn("Costo Unitario");
         model.addColumn("Costo Total");
 
         try (ResultSet rs = st.executeQuery("SELECT t1.Requisicion_ID,t1.Producto_ID,t1.Cantidad,t1.TotalArticulo,"
                 + "t2.descripcion,t2.precio"
-                + " FROM productosrequisiciones as t1 inner join productos as t2 on Requisicion_ID=" + id+" and "
+                + " FROM productosrequisiciones as t1 inner join productos as t2 on Requisicion_ID=" + id + " and "
                 + "t1.Producto_ID=t2.Producto_ID")) {
             Object[] fila = new Object[7];
             while (rs.next()) {
-                i=i+1;
+                i = i + 1;
                 fila[0] = i;
                 String d = rs.getString("t1.Producto_ID");
                 fila[1] = d;
@@ -119,7 +120,7 @@ public class Conexion {
                 fila[4] = f;
                 String h = rs.getString("t1.TotalArticulo");
                 fila[5] = h;
-                model.addRow(fila);     
+                model.addRow(fila);
             }
 
         } catch (SQLException ex) {
@@ -145,7 +146,8 @@ public class Conexion {
         }
         return infor;
     }
-        public Object[] resultadPro(String id) {
+
+    public Object[] resultadPro(String id) {
         String infor[] = new String[8];
         try (ResultSet rs = st.executeQuery("SELECT * FROM proveedores where Proveedores_ID=" + id)) {
             while (rs.next()) {
@@ -163,6 +165,7 @@ public class Conexion {
         }
         return infor;
     }
+
     public Object[] resultadosrequi(String id) {
         String infor[] = new String[7];
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID,Usuario_ID,Proveedores_ID"
@@ -182,9 +185,9 @@ public class Conexion {
         return infor;
     }
 
-    public int consultaprove(){
-        int ID=0;
-           try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores order by Proveedores_ID desc limit 1")) {
+    public int consultaprove() {
+        int ID = 0;
+        try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores order by Proveedores_ID desc limit 1")) {
             while (rs.next()) {
                 ID = rs.getInt("Proveedores_ID");
             }
@@ -192,9 +195,9 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ID;
-        
-    }    
-    
+
+    }
+
     public boolean AgregarProducto(int Producto_ID, String nombre, String descripcion, int precio, int UnidadMedida, String categoria) {
         String insert;
         insert = "insert into Productos(Producto_ID,nombre,"
@@ -358,6 +361,37 @@ public class Conexion {
         return false;
     }
 
+    public boolean ModificarPro(int Proveedores_ID, String proveedor, String Nombre, String Direccion, String Telefono,
+            String FormaPago, String RFC, String Estado) {
+        String insert = "update proveedores set Proveedores_ID=? ,proveedor=?,Nombre=?,Direccion=?,"
+                + "Telefono=?,FormaPago=?,RFC=?,Estado=? where Proveedores_ID=" + Proveedores_ID + "";
+        PreparedStatement ps = null;
+        try {
+            cnn.setAutoCommit(false);
+            ps = cnn.prepareStatement(insert);
+            ps.setInt(1, Proveedores_ID);
+            ps.setString(2, proveedor);
+            ps.setString(3, Nombre);
+            ps.setString(4, Direccion);
+            ps.setString(5, Telefono);
+            ps.setString(6, FormaPago);
+            ps.setString(7, RFC);
+            ps.setString(8, Estado);
+            ps.executeUpdate();
+            cnn.commit();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+
     public boolean eliminarProductos(int Producto_ID) {
         String delete = "delete from Productos where Producto_ID=" + Producto_ID + "";
         PreparedStatement ps = null;
@@ -378,9 +412,28 @@ public class Conexion {
         }
         return false;
     }
+     public boolean eliminarPro(String Proveedores_ID) {
+        String delete = "delete from proveedores where Proveedores_ID=" + Proveedores_ID + "";
+        PreparedStatement ps = null;
+        try {
+            cnn.setAutoCommit(false);
+            ps = cnn.prepareStatement(delete);
+            ps.executeUpdate();
+            cnn.commit();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
 
     public String ObtenerUsuario() {
-        System.out.println(usuariof + "3");
         return usuariof;
     }
 }

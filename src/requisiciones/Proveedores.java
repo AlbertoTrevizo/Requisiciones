@@ -14,14 +14,15 @@ import javax.swing.JOptionPane;
  */
 public class Proveedores extends javax.swing.JFrame {
 
-   public Conexion consultas = new Conexion();
-   public int ID;
+    public Conexion consultas = new Conexion();
+    public int ID;
+    public String est;
 
     public Proveedores() {
         initComponents();
         setLocationRelativeTo(null);
-        ID=consultas.consultaprove()+1;
-        txtID.setText(""+ID);
+        ID = consultas.consultaprove() + 1;
+        txtID.setText("" + ID);
     }
 
     /**
@@ -364,6 +365,11 @@ public class Proveedores extends javax.swing.JFrame {
         cbEstadoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo", " " }));
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("RFC");
 
@@ -386,6 +392,11 @@ public class Proveedores extends javax.swing.JFrame {
         jLabel26.setText("Buscar :");
 
         btnBuscarE.setText("Buscar");
+        btnBuscarE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -489,6 +500,11 @@ public class Proveedores extends javax.swing.JFrame {
         jTabbedPane1.addTab("Eliminar Proveedor", jPanel3);
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -517,30 +533,27 @@ public class Proveedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String proveedor,nombre,direccion,telefono,FormaPago,RFC,estado;
+        String proveedor, nombre, direccion, telefono, FormaPago, RFC, estado;
 
-        proveedor=txtProveedor.getText();
-        nombre=txtNombre.getText();
-        direccion=txtDireccion.getText();
-        telefono=txtTelefono.getText();
-        FormaPago=txtFormaPago.getText();
-        RFC=txtRFC.getText();
-        estado=cbEstado.getSelectedItem().toString();
+        proveedor = txtProveedor.getText();
+        nombre = txtNombre.getText();
+        direccion = txtDireccion.getText();
+        telefono = txtTelefono.getText();
+        FormaPago = txtFormaPago.getText();
+        RFC = txtRFC.getText();
+        estado = cbEstado.getSelectedItem().toString();
 
-        if(consultas.AgregarProveedor(ID, proveedor, nombre, direccion, telefono, FormaPago, RFC, estado)){
+        if (consultas.AgregarProveedor(ID, proveedor, nombre, direccion, telefono, FormaPago, RFC, estado)) {
             JOptionPane.showMessageDialog(null, "El proveedor fue dado de alta de manera exitosa");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Hubo un problema al agregar al proveedor");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String ID=txtBuscarM.getText();
-        String consultID,comp;
-        
-        
+        String ID = txtBuscarM.getText();
+        String consultID, comp;
         consultID = consultas.consultPro(ID);
-        System.out.println(consultID);
         if (consultID == null) {
             JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
         } else {
@@ -552,20 +565,90 @@ public class Proveedores extends javax.swing.JFrame {
             txtTelefonoM.setText((String) datos[4]);
             txtFormaPagoM.setText((String) datos[5]);
             txtRFCM.setText((String) datos[6]);
-            comp=((String)datos[7]);
-            if(comp.equals("Activo")){
+            comp = ((String) datos[7]);
+            if (comp.equals("Activo")) {
                 cbEstadoM.setSelectedIndex(0);
-            }else{
+            } else {
                 cbEstadoM.setSelectedItem(1);
             }
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
+        String proveedor, Nombre, direccion, telefono, FPago, RFC, Estado = null;
+        int ID;
+
+        ID = Integer.parseInt(txtIDProM.getText());
+        proveedor = txtProveedorM.getText();
+        Nombre = txtNombreM.getText();
+        direccion = txtDireccionM.getText();
+        telefono = txtTelefonoM.getText();
+        FPago = txtFormaPagoM.getText();
+        RFC = txtRFCM.getText();
+        Estado = cbEstadoM.getSelectedItem().toString();
+
+        if (consultas.ModificarPro(ID, proveedor, Nombre, direccion, telefono, FPago, RFC, Estado)) {
+            JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
+            txtIDProM.setText("");
+            txtProveedorM.setText("");
+            txtNombreM.setText("");
+            txtDireccionM.setText("");
+            txtTelefonoM.setText("");
+            txtFormaPagoM.setText("");
+            txtRFCM.setText("");
+            cbEstadoM.setSelectedIndex(0);
+            txtBuscarM.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Los datos no pudieron ser guardados", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnBuscarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEActionPerformed
+        String ID = txtBuscarE.getText();
+        String consultID, comp;
+        consultID = consultas.consultPro(ID);
+        if (consultID == null) {
+            JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+        } else {
+            Object datos[] = consultas.resultadPro(ID);
+            txtIDProE.setText((String) datos[0]);
+            txtProveedorE.setText((String) datos[1]);
+            txtNombreE.setText((String) datos[2]);
+            txtDireccionE.setText((String) datos[3]);
+            txtTelefonoE.setText((String) datos[4]);
+            txtFormaPagoE.setText((String) datos[5]);
+            txtRFCE.setText((String) datos[6]);
+            comp = ((String) datos[7]);
+            est=comp;
+            if (comp.equals("Activo")) {
+                cbEstadoE.setSelectedIndex(0);
+            } else {
+                cbEstadoE.setSelectedItem(1);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarEActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String ID = txtBuscarM.getText();
+        String consultID, comp;
+        consultID = consultas.consultPro(ID);
+
+        if (consultID == null) {
+            JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
+        } else if (consultas.eliminarPro(consultID) && "Inactivo".equals(est)) {
+            JOptionPane.showMessageDialog(null, "El proveedor pudo ser eliminado");
+        }else{
+            JOptionPane.showMessageDialog(null, "El proveedor no pudo ser eliminado");
+            JOptionPane.showMessageDialog(null, "Compruebe que se encuentra Inactivo para poder eliminarlo");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        new Menu().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
