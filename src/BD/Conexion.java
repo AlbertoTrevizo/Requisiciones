@@ -130,7 +130,6 @@ public class Conexion {
     }
      public DefaultTableModel CatalogoProductos() {
         DefaultTableModel model = new DefaultTableModel();
-        int i = 0;
         model.addColumn("Producto_ID");
         model.addColumn("Nombre");
         model.addColumn("Descripcion");
@@ -153,6 +152,77 @@ public class Conexion {
                 fila[4] = f;
                 String h = rs.getString("Categoria");
                 fila[5] = h;
+                model.addRow(fila);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+     public DefaultTableModel CatalogoRequisiciones() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Requisicion_ID");
+        model.addColumn("Usuario_ID");
+        model.addColumn("Proveedores_ID");
+        model.addColumn("Monto");
+        model.addColumn("Fecha Requisición");
+        model.addColumn("Detalle Requisición");
+        model.addColumn("Estado");    
+        try (ResultSet rs = st.executeQuery("select * from requisiciones")) {
+            Object[] fila = new Object[7];
+            while (rs.next()) {
+                String a=rs.getString("Requisicion_ID");
+                fila[0] = a;
+                String d = rs.getString("Usuario_ID");
+                fila[1] = d;
+                String e = rs.getString("Proveedores_ID");
+                fila[2] = e;
+                String g = rs.getString("Monto");
+                fila[3] = g;
+                String f = rs.getString("FechaRequisicion");
+                fila[4] = f;
+                String h = rs.getString("DetalleRequisicion");
+                fila[5] = h;
+                String i = rs.getString("Estado");
+                fila[5] = i;
+                model.addRow(fila);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+     public DefaultTableModel CatalogoProveedores() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Proveedores_ID");
+        model.addColumn("proveedor");
+        model.addColumn("Nombre");
+        model.addColumn("Direccion");
+        model.addColumn("Telefono");
+        model.addColumn("Forma de Pago");
+        model.addColumn("RFC");
+        model.addColumn("Estado"); 
+        try (ResultSet rs = st.executeQuery("select * from proveedores")) {
+            Object[] fila = new Object[8];
+            while (rs.next()) {
+                String a=rs.getString("Proveedores_ID");
+                fila[0] = a;
+                String d = rs.getString("proveedor");
+                fila[1] = d;
+                String e = rs.getString("Nombre");
+                fila[2] = e;
+                String g = rs.getString("Direccion");
+                fila[3] = g;
+                String f = rs.getString("Telefono");
+                fila[4] = f;
+                String h = rs.getString("FormaPago");
+                fila[5] = h;
+                String i = rs.getString("RFC");
+                fila[6] = i;
+                String k = rs.getString("Estado");
+                fila[7] = k;
                 model.addRow(fila);
             }
 

@@ -98,7 +98,7 @@ public class Proveedores extends javax.swing.JFrame {
         txtBuscarE = new javax.swing.JTextField();
         btnBuscarE = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCatalogo = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -503,7 +503,12 @@ public class Proveedores extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Catalogo");
+        btnCatalogo.setText("Catalogo");
+        btnCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCatalogoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -516,7 +521,7 @@ public class Proveedores extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegresar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnCatalogo)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -527,7 +532,7 @@ public class Proveedores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
-                    .addComponent(jButton1))
+                    .addComponent(btnCatalogo))
                 .addGap(12, 12, 12))
         );
 
@@ -652,6 +657,10 @@ public class Proveedores extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
+        new CatalogoProveedores().setVisible(true);
+    }//GEN-LAST:event_btnCatalogoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -691,13 +700,13 @@ public class Proveedores extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarE;
+    private javax.swing.JButton btnCatalogo;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JComboBox<String> cbEstadoE;
     private javax.swing.JComboBox<String> cbEstadoM;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
