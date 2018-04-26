@@ -52,7 +52,6 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         usuariof = usuario;
-        System.out.println(usuariof + "1.5");
         return usu;
     }
 
@@ -67,7 +66,18 @@ public class Conexion {
         }
         return idbusc;
     }
-
+        public String consultPro(String id) {
+        String idbusc = null;
+        try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores where Proveedores_ID=" + id)) {
+            while (rs.next()) {
+                idbusc = rs.getString("Proveedores_ID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idbusc;
+    }
+        
     public String consultarequi(String id) {
         String idbusc = null;
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID FROM requisiciones where Requisicion_ID=" + id)) {
@@ -135,7 +145,24 @@ public class Conexion {
         }
         return infor;
     }
-
+        public Object[] resultadPro(String id) {
+        String infor[] = new String[8];
+        try (ResultSet rs = st.executeQuery("SELECT * FROM proveedores where Proveedores_ID=" + id)) {
+            while (rs.next()) {
+                infor[0] = rs.getString("Proveedores_ID");
+                infor[1] = rs.getString("proveedor");
+                infor[2] = rs.getString("Nombre");
+                infor[3] = rs.getString("Direccion");
+                infor[4] = rs.getString("Telefono");
+                infor[5] = rs.getString("FormaPago");
+                infor[6] = rs.getString("RFC");
+                infor[7] = rs.getString("Estado");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return infor;
+    }
     public Object[] resultadosrequi(String id) {
         String infor[] = new String[7];
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID,Usuario_ID,Proveedores_ID"
