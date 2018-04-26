@@ -129,8 +129,6 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         new Productos().setVisible(true);
-
-        //   this.setVisible(false);
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnRealizarRequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarRequeActionPerformed
