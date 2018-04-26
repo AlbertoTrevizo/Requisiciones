@@ -128,7 +128,39 @@ public class Conexion {
         }
         return model;
     }
+     public DefaultTableModel CatalogoProductos() {
+        DefaultTableModel model = new DefaultTableModel();
+        int i = 0;
+        model.addColumn("Producto_ID");
+        model.addColumn("Nombre");
+        model.addColumn("Descripcion");
+        model.addColumn("Precio");
+        model.addColumn("Unidad de Medida");
+        model.addColumn("Categoria");
+        model.addColumn("Proveedor");    
+        try (ResultSet rs = st.executeQuery("select * from productos")) {
+            Object[] fila = new Object[6];
+            while (rs.next()) {
+                String a=rs.getString("Producto_ID");
+                fila[0] = a;
+                String d = rs.getString("nombre");
+                fila[1] = d;
+                String e = rs.getString("descripcion");
+                fila[2] = e;
+                String g = rs.getString("precio");
+                fila[3] = g;
+                String f = rs.getString("UnidadMedida");
+                fila[4] = f;
+                String h = rs.getString("Categoria");
+                fila[5] = h;
+                model.addRow(fila);
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
     public Object[] resultados(String id) {
         String infor[] = new String[6];
         try (ResultSet rs = st.executeQuery("SELECT Producto_ID,nombre,descripcion"
@@ -195,9 +227,18 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ID;
-
     }
-
+     public int consultaprod() {
+        int ID = 0;
+        try (ResultSet rs = st.executeQuery("SELECT Producto_ID FROM productos order by Producto_ID desc limit 1")) {
+            while (rs.next()) {
+                ID = rs.getInt("Producto_ID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ID;
+    }
     public boolean AgregarProducto(int Producto_ID, String nombre, String descripcion, int precio, int UnidadMedida, String categoria) {
         String insert;
         insert = "insert into Productos(Producto_ID,nombre,"
