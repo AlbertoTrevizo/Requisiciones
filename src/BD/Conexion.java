@@ -78,7 +78,31 @@ public class Conexion {
         }
         return idbusc;
     }
-
+    public int contar(){
+        int filas=0;
+            try (ResultSet rs = st.executeQuery("SELECT count(*) as filas from proveedores")) {
+            while (rs.next()) {
+                filas = rs.getInt("filas");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return filas;
+    }
+     public Object[] Prove(int filas) {
+        Object[] Proveedores = new Object[filas];
+        int i=0;
+        try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores")) {
+            while (rs.next()) {
+                Proveedores[i] = rs.getString("Proveedores_ID");
+                i=i+1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Proveedores;
+    }
     public String consultarequi(String id) {
         String idbusc = null;
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID FROM requisiciones where Requisicion_ID=" + id)) {

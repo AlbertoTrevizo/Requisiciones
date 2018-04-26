@@ -21,25 +21,23 @@ public class Productos extends javax.swing.JFrame {
 
     public Conexion consultas = new Conexion();
     public int ID;
+    public int filas;
+
     public Productos() {
         initComponents();
         setLocationRelativeTo(null);
-        ID = consultas.consultaprod()+ 1;
+        ID = consultas.consultaprod() + 1;
         txtID.setText("" + ID);
-    }
-
-    public void items() {
-        TextAutoCompleter textAutoAcompleter = new TextAutoCompleter(txtBuscar);
-        try {
-            ResultSet rs = consultas.st1.executeQuery("SELECT Producto_ID FROM Productos");
-            while (rs.next()) {
-                String e = rs.getString("Producto_ID");
-                textAutoAcompleter.addItem(e);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        filas = consultas.contar();
+        System.out.println(""+filas);
+        Object Proveedores[] = consultas.Prove(filas);
+        
+        for (int i = 1; i <= filas; i++) {
+            cbProveedor.addItem(""+Proveedores[i-1]);
         }
     }
+
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,6 +63,8 @@ public class Productos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        cbProveedor = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
@@ -147,6 +147,8 @@ public class Productos extends javax.swing.JFrame {
 
         jLabel11.setText("Categoria 4 - No critica");
 
+        jLabel33.setText("Proveedor");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -154,6 +156,9 @@ public class Productos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -179,11 +184,12 @@ public class Productos extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel10)
-                                    .addComponent(jLabel11))))
-                        .addGap(0, 109, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregar)))
+                                    .addComponent(jLabel11)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 109, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -220,7 +226,11 @@ public class Productos extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(cbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addComponent(btnAgregar)
                 .addContainerGap())
         );
@@ -345,7 +355,7 @@ public class Productos extends javax.swing.JFrame {
                         .addComponent(jLabel27)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel28)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btnModificar)
                 .addContainerGap())
         );
@@ -495,7 +505,7 @@ public class Productos extends javax.swing.JFrame {
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel32)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(btnEliminar)
                 .addContainerGap())
         );
@@ -520,8 +530,11 @@ public class Productos extends javax.swing.JFrame {
 
         if (consultas.AgregarProducto(ID, Nombre, Descripcion, precio, unidad, "1")) {
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
-            txtID.setText("");txtNombre.setText("");txtDescripcion.setText("");
-            txtPrecio.setText("");txtUnidad.setText("");
+            txtID.setText("");
+            txtNombre.setText("");
+            txtDescripcion.setText("");
+            txtPrecio.setText("");
+            txtUnidad.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "Los datos no pudieron ser guardados", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -583,14 +596,14 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarEActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         int ID = Integer.parseInt(txtEliminar.getText());
-         
-         if(consultas.eliminarProductos(ID)){
-             JOptionPane.showMessageDialog(null, "Se ha eliminado el producto de manera correcta");
-         }else{
-             JOptionPane.showMessageDialog(null,"Hubo un problema eliminando el producto");
-         }
-         
+        int ID = Integer.parseInt(txtEliminar.getText());
+
+        if (consultas.eliminarProductos(ID)) {
+            JOptionPane.showMessageDialog(null, "Se ha eliminado el producto de manera correcta");
+        } else {
+            JOptionPane.showMessageDialog(null, "Hubo un problema eliminando el producto");
+        }
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
@@ -637,6 +650,7 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JComboBox<String> cbCategoriaE;
     private javax.swing.JComboBox<String> cbCategoriaM;
+    private javax.swing.JComboBox<String> cbProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -663,6 +677,7 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
