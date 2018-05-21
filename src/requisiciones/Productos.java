@@ -29,15 +29,13 @@ public class Productos extends javax.swing.JFrame {
         ID = consultas.consultaprod() + 1;
         txtID.setText("" + ID);
         filas = consultas.contar();
-        System.out.println(""+filas);
+        System.out.println("" + filas);
         Object Proveedores[] = consultas.Prove(filas);
-        
+
         for (int i = 1; i <= filas; i++) {
-            cbProveedor.addItem(""+Proveedores[i-1]);
+            cbProveedor.addItem("" + Proveedores[i - 1]);
         }
     }
-
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -111,11 +109,34 @@ public class Productos extends javax.swing.JFrame {
 
         jLabel6.setText("Categoria");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDescripcion);
 
         cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Papeleria", "Insumos", "Mobiliario", "Equipo tecnico", "Herramientas" }));
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
+
+        txtUnidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUnidadKeyTyped(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -207,15 +228,38 @@ public class Productos extends javax.swing.JFrame {
 
         jLabel13.setText("Nombre");
 
+        txtNombreM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreMKeyTyped(evt);
+            }
+        });
+
         jLabel14.setText("Descripcion");
 
         txtDescripcionM.setColumns(20);
         txtDescripcionM.setRows(5);
+        txtDescripcionM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionMKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(txtDescripcionM);
 
         jLabel15.setText("Precio");
 
+        txtPrecioM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioMKeyTyped(evt);
+            }
+        });
+
         jLabel16.setText("Unidad");
+
+        txtUnidadM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUnidadMKeyTyped(evt);
+            }
+        });
 
         jLabel17.setText("Categoria");
 
@@ -463,7 +507,7 @@ public class Productos extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String ID = txtBuscar.getText();
-        String buscID,comp;
+        String buscID, comp;
 
         buscID = consultas.consulta(ID);
         if (buscID == null) {
@@ -475,17 +519,17 @@ public class Productos extends javax.swing.JFrame {
             txtDescripcionM.setText((String) datos[2]);
             txtPrecioM.setText((String) datos[3]);
             txtUnidadM.setText((String) datos[4]);
-            comp=((String)datos[5]);
-            
-            if(comp.equals("Papeleria")){
+            comp = ((String) datos[5]);
+
+            if (comp.equals("Papeleria")) {
                 cbCategoriaM.setSelectedIndex(0);
-            }else if(comp.equals("Insumos")){
+            } else if (comp.equals("Insumos")) {
                 cbCategoriaM.setSelectedIndex(1);
-            }else if(comp.equals("Mobiliario")){
+            } else if (comp.equals("Mobiliario")) {
                 cbCategoriaM.setSelectedIndex(2);
-            }else if(comp.equals("Equipo tecnico")){
+            } else if (comp.equals("Equipo tecnico")) {
                 cbCategoriaM.setSelectedIndex(3);
-            }else if(comp.equals("Herramientas")){
+            } else if (comp.equals("Herramientas")) {
                 cbCategoriaM.setSelectedIndex(4);
             }
         }
@@ -511,7 +555,7 @@ public class Productos extends javax.swing.JFrame {
 
     private void btnBuscarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEActionPerformed
         String ID = txtEliminar.getText();
-        String buscID,comp;
+        String buscID, comp;
 
         buscID = consultas.consulta(ID);
         if (buscID == null) {
@@ -523,21 +567,21 @@ public class Productos extends javax.swing.JFrame {
             txtDescripcionE.setText((String) datos[2]);
             txtPrecioE.setText((String) datos[3]);
             txtUnidadE.setText((String) datos[4]);
-                    comp=((String)datos[5]);
-            
-            if(comp.equals("Papeleria")){
+            comp = ((String) datos[5]);
+
+            if (comp.equals("Papeleria")) {
                 cbCategoriaE.setSelectedIndex(0);
-            }else if(comp.equals("Insumos")){
+            } else if (comp.equals("Insumos")) {
                 cbCategoriaE.setSelectedIndex(1);
-            }else if(comp.equals("Mobiliario")){
+            } else if (comp.equals("Mobiliario")) {
                 cbCategoriaE.setSelectedIndex(2);
-            }else if(comp.equals("Equipo tecnico")){
+            } else if (comp.equals("Equipo tecnico")) {
                 cbCategoriaE.setSelectedIndex(3);
-            }else if(comp.equals("Herramientas")){
+            } else if (comp.equals("Herramientas")) {
                 cbCategoriaE.setSelectedIndex(4);
             }
         }
-        
+
 
     }//GEN-LAST:event_btnBuscarEActionPerformed
 
@@ -551,6 +595,83 @@ public class Productos extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if (txtNombre.getText().length() == 25) {
+            getToolkit().beep();
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+        if (txtDescripcion.getText().length() == 60) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        if (txtPrecio.getText().length() == 10) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtUnidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidadKeyTyped
+        if (txtUnidad.getText().length() == 10) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUnidadKeyTyped
+
+    private void txtNombreMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreMKeyTyped
+        if (txtNombreM.getText().length() == 25) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreMKeyTyped
+
+    private void txtDescripcionMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionMKeyTyped
+        if (txtDescripcionM.getText().length() == 60) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripcionMKeyTyped
+
+    private void txtPrecioMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioMKeyTyped
+        if (txtPrecioM.getText().length() == 10) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioMKeyTyped
+
+    private void txtUnidadMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidadMKeyTyped
+        if (txtUnidadM.getText().length() == 10) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUnidadMKeyTyped
 
     /**
      * @param args the command line arguments

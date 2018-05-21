@@ -232,8 +232,16 @@ public class RealizarRequisicion extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cantidad = null;
+        String string = "";
         int comp;
-        cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        do {
+            cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+            if (cantidad.matches("[0-9]*")) {
+                string = cantidad;
+            } else {
+            }
+        } while (!cantidad.matches("[0-9]*"));
+
         if (cantidad == null) {
         } else {
             comp = Integer.parseInt(cantidad);
@@ -258,13 +266,26 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUnidadMouseClicked
-        String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        String cantidad = null;
+        String string = "";
         int comp;
+        do {
+            cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+            
+            if (cantidad.matches("[0-9]*")) {
+                string = cantidad;
+            } else {
+                JOptionPane.showMessageDialog(null, "Caracteres invalidos");
+            }
+        } while (!cantidad.matches("[0-9]*"));
+
         if (cantidad == null) {
+      
         } else {
             comp = Integer.parseInt(cantidad);
             if (comp <= 0) {
                 JOptionPane.showMessageDialog(null, "Cantidad invalida");
+                txtUnidad.setText("");
             } else {
                 txtUnidad.setText(cantidad);
             }
@@ -307,16 +328,15 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         int Requisicion_ID, Usuario_ID, Proveedores_ID;
         double Monto;
         String FechaRequisicion, DetalleRequisicion, Estado;
-
         DetalleRequisicion = JOptionPane.showInputDialog(null, "Ingrese una nota a la requisicion");
-        System.out.println(DetalleRequisicion);
-
         Requisicion_ID = consultas.requiID() + 1;
         Usuario_ID = 0;
         Proveedores_ID = 2;
         Monto = total;
-        FechaRequisicion = "2018-04-13";
-        Estado = "Activo";
+        java.util.Date fecha1 = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        FechaRequisicion = sdf.format(fecha1);
+        Estado = "Pendiente";
 
         if (consultas.requisiciones(Requisicion_ID, Usuario_ID,
                 Proveedores_ID, Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {

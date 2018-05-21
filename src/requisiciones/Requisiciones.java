@@ -7,6 +7,7 @@ package requisiciones;
 
 import BD.Conexion;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import requisiciones.panels.SignUp;
@@ -138,6 +139,11 @@ public class Requisiciones extends javax.swing.JFrame {
                 txtPasswordFocusGained(evt);
             }
         });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
+            }
+        });
 
         lblPassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(204, 204, 204));
@@ -154,11 +160,6 @@ public class Requisiciones extends javax.swing.JFrame {
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEmailFocusGained(evt);
-            }
-        });
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
             }
         });
 
@@ -221,7 +222,6 @@ public class Requisiciones extends javax.swing.JFrame {
             new Menu().setVisible(true);
            
         }else{
-            txtEmail.setText("");
             txtPassword.setText("");
             JOptionPane.showMessageDialog(null, "Usuario incorrecto");
         }
@@ -238,7 +238,6 @@ public class Requisiciones extends javax.swing.JFrame {
             this.setVisible(Boolean.FALSE);
             new Menu().setVisible(true);
         }else{
-            txtEmail.setText("");
             txtPassword.setText("");
             JOptionPane.showMessageDialog(null, "Usuario incorrecto");
         }
@@ -252,9 +251,24 @@ public class Requisiciones extends javax.swing.JFrame {
         txtEmail.setText("");
     }//GEN-LAST:event_txtEmailFocusGained
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-       
-    }//GEN-LAST:event_txtEmailActionPerformed
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+           char Tecla = evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            String usuario=txtEmail.getText();
+            String pass=txtPassword.getText();
+
+            boolean inicio=false;
+            inicio=cone.login(usuario,pass);
+
+            if(inicio==true){
+                this.setVisible(Boolean.FALSE);
+                new Menu().setVisible(true);
+            }else{
+                txtPassword.setText("");
+                JOptionPane.showMessageDialog(pnlBtnSignIn, "Usuario incorrecto");
+            }
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
 
     /**
      * @param args the command line arguments

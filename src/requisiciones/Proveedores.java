@@ -106,13 +106,43 @@ public class Proveedores extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("ID del Proveedor");
+
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Proveedor");
 
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Nombre");
 
+        txtFormaPago.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFormaPagoKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Direccion");
+
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Telefono");
 
@@ -125,6 +155,12 @@ public class Proveedores extends javax.swing.JFrame {
         jLabel8.setText("Estado");
 
         txtID.setEditable(false);
+
+        txtProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProveedorKeyTyped(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -236,13 +272,43 @@ public class Proveedores extends javax.swing.JFrame {
 
         jLabel10.setText("Proveedor");
 
+        txtProveedorM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProveedorMKeyTyped(evt);
+            }
+        });
+
         jLabel11.setText("Nombre");
+
+        txtNombreM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreMKeyTyped(evt);
+            }
+        });
 
         jLabel12.setText("Direccion");
 
+        txtDireccionM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionMKeyTyped(evt);
+            }
+        });
+
         jLabel13.setText("Telefono");
 
+        txtTelefonoM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoMKeyTyped(evt);
+            }
+        });
+
         jLabel14.setText("Forma de Pago");
+
+        txtFormaPagoM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFormaPagoMKeyTyped(evt);
+            }
+        });
 
         jLabel15.setText("RFC");
 
@@ -372,15 +438,25 @@ public class Proveedores extends javax.swing.JFrame {
 
         txtRFCE.setEditable(false);
 
+        txtFormaPagoE.setEditable(false);
+
         jLabel20.setText("Forma de Pago");
 
         jLabel21.setText("Telefono");
 
+        txtTelefonoE.setEditable(false);
+
         jLabel22.setText("Direccion");
+
+        txtDireccionE.setEditable(false);
 
         jLabel23.setText("Nombre");
 
+        txtNombreE.setEditable(false);
+
         jLabel24.setText("Proveedor");
+
+        txtProveedorE.setEditable(false);
 
         jLabel25.setText("ID del proveedor");
 
@@ -628,7 +704,7 @@ public class Proveedores extends javax.swing.JFrame {
             txtFormaPagoE.setText((String) datos[5]);
             txtRFCE.setText((String) datos[6]);
             comp = ((String) datos[7]);
-            est=comp;
+            est = comp;
             if (comp.equals("Activo")) {
                 cbEstadoE.setSelectedIndex(0);
             } else {
@@ -646,7 +722,7 @@ public class Proveedores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
         } else if (consultas.eliminarPro(consultID) && "Inactivo".equals(est)) {
             JOptionPane.showMessageDialog(null, "El proveedor pudo ser eliminado");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "El proveedor no pudo ser eliminado");
             JOptionPane.showMessageDialog(null, "Compruebe que se encuentra Inactivo para poder eliminarlo");
         }
@@ -660,6 +736,97 @@ public class Proveedores extends javax.swing.JFrame {
     private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
         new CatalogoProveedores().setVisible(true);
     }//GEN-LAST:event_btnCatalogoActionPerformed
+
+    private void txtProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedorKeyTyped
+        if (txtProveedor.getText().length() == 20) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtProveedorKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if (txtNombre.getText().length() == 25) {
+            evt.consume();
+            getToolkit().beep();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if (txtDireccion.getText().length() == 25) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        if (txtTelefono.getText().length() == 15) {
+            evt.consume();
+            getToolkit().beep();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtFormaPagoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormaPagoKeyTyped
+        if (txtFormaPago.getText().length() == 20) {
+            evt.consume();
+            getToolkit().beep();
+        }
+           char c= evt.getKeyChar();
+        if(Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFormaPagoKeyTyped
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        if (txtRFC.getText().length() == 10) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+
+    private void txtProveedorMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedorMKeyTyped
+        if (txtProveedorM.getText().length() == 20) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtProveedorMKeyTyped
+
+    private void txtNombreMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreMKeyTyped
+        if (txtNombreM.getText().length() == 25) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtNombreMKeyTyped
+
+    private void txtDireccionMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionMKeyTyped
+        if (txtDireccionM.getText().length() == 25) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionMKeyTyped
+
+    private void txtTelefonoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoMKeyTyped
+        if (txtTelefonoM.getText().length() == 15) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtTelefonoMKeyTyped
+
+    private void txtFormaPagoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormaPagoMKeyTyped
+        if (txtFormaPagoM.getText().length() == 20) {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtFormaPagoMKeyTyped
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@
 package requisiciones;
 
 import BD.Conexion;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,6 +58,11 @@ public class SignIn extends javax.swing.JPanel {
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPasswordFocusGained(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
 
@@ -181,13 +187,32 @@ public class SignIn extends javax.swing.JPanel {
     }//GEN-LAST:event_pnlBtnSignInMouseClicked
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
-        // TODO add your handling code here:
         txtEmail.setText("");
     }//GEN-LAST:event_txtEmailFocusGained
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+       char Tecla = evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            String usuario=txtEmail.getText();
+            String pass=txtPassword.getText();
+
+            boolean inicio=false;
+            inicio=cone.login(usuario,pass);
+
+            if(inicio==true){
+                this.setVisible(Boolean.FALSE);
+                new Menu().setVisible(true);
+            }else{
+                txtEmail.setText("");
+                txtPassword.setText("");
+                JOptionPane.showMessageDialog(pnlBtnSignIn, "Usuario incorrecto");
+            }
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
