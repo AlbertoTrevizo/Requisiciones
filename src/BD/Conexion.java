@@ -78,31 +78,34 @@ public class Conexion {
         }
         return idbusc;
     }
-    public int contar(){
-        int filas=0;
-            try (ResultSet rs = st.executeQuery("SELECT count(*) as filas from proveedores")) {
+
+    public int contar() {
+        int filas = 0;
+        try (ResultSet rs = st.executeQuery("SELECT count(*) as filas from proveedores")) {
             while (rs.next()) {
                 filas = rs.getInt("filas");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return filas;
     }
-     public Object[] Prove(int filas) {
+
+    public Object[] Prove(int filas) {
         Object[] Proveedores = new Object[filas];
-        int i=0;
+        int i = 0;
         try (ResultSet rs = st.executeQuery("SELECT Proveedores_ID FROM proveedores")) {
             while (rs.next()) {
                 Proveedores[i] = rs.getString("Proveedores_ID");
-                i=i+1;
+                i = i + 1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Proveedores;
     }
+
     public String consultarequi(String id) {
         String idbusc = null;
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID FROM requisiciones where Requisicion_ID=" + id)) {
@@ -152,7 +155,8 @@ public class Conexion {
         }
         return model;
     }
-     public DefaultTableModel CatalogoProductos() {
+
+    public DefaultTableModel CatalogoProductos() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Producto_ID");
         model.addColumn("Nombre");
@@ -160,11 +164,11 @@ public class Conexion {
         model.addColumn("Precio");
         model.addColumn("Unidad de Medida");
         model.addColumn("Categoria");
-        model.addColumn("Proveedor");    
+        model.addColumn("Proveedor");
         try (ResultSet rs = st.executeQuery("select * from productos")) {
             Object[] fila = new Object[6];
             while (rs.next()) {
-                String a=rs.getString("Producto_ID");
+                String a = rs.getString("Producto_ID");
                 fila[0] = a;
                 String d = rs.getString("nombre");
                 fila[1] = d;
@@ -184,7 +188,8 @@ public class Conexion {
         }
         return model;
     }
-     public DefaultTableModel CatalogoRequisiciones() {
+
+    public DefaultTableModel CatalogoRequisiciones() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Requisicion_ID");
         model.addColumn("Usuario_ID");
@@ -192,11 +197,11 @@ public class Conexion {
         model.addColumn("Monto");
         model.addColumn("Fecha Requisición");
         model.addColumn("Detalle Requisición");
-        model.addColumn("Estado");    
+        model.addColumn("Estado");
         try (ResultSet rs = st.executeQuery("select * from requisiciones")) {
             Object[] fila = new Object[7];
             while (rs.next()) {
-                String a=rs.getString("Requisicion_ID");
+                String a = rs.getString("Requisicion_ID");
                 fila[0] = a;
                 String d = rs.getString("Usuario_ID");
                 fila[1] = d;
@@ -218,20 +223,21 @@ public class Conexion {
         }
         return model;
     }
-     public DefaultTableModel CatalogoProveedores() {
+
+    public DefaultTableModel CatalogoProveedores() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Proveedores_ID");
-        model.addColumn("proveedor");
+        model.addColumn("Proveedor");
         model.addColumn("Nombre");
         model.addColumn("Direccion");
         model.addColumn("Telefono");
         model.addColumn("Forma de Pago");
         model.addColumn("RFC");
-        model.addColumn("Estado"); 
+        model.addColumn("Estado");
         try (ResultSet rs = st.executeQuery("select * from proveedores")) {
             Object[] fila = new Object[8];
             while (rs.next()) {
-                String a=rs.getString("Proveedores_ID");
+                String a = rs.getString("Proveedores_ID");
                 fila[0] = a;
                 String d = rs.getString("proveedor");
                 fila[1] = d;
@@ -255,10 +261,11 @@ public class Conexion {
         }
         return model;
     }
+
     public Object[] resultados(String id) {
-        String infor[] = new String[6];
+        String infor[] = new String[7];
         try (ResultSet rs = st.executeQuery("SELECT Producto_ID,nombre,descripcion"
-                + ",precio,UnidadMedida,categoria FROM Productos where Producto_ID=" + id)) {
+                + ",precio,UnidadMedida,categoria,Proveedores_ID FROM Productos where Producto_ID=" + id)) {
             while (rs.next()) {
                 infor[0] = rs.getString("Producto_ID");
                 infor[1] = rs.getString("nombre");
@@ -266,6 +273,7 @@ public class Conexion {
                 infor[3] = rs.getString("precio");
                 infor[4] = rs.getString("UnidadMedida");
                 infor[5] = rs.getString("categoria");
+                infor[6] = rs.getString("Proveedores_ID");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -322,7 +330,8 @@ public class Conexion {
         }
         return ID;
     }
-     public int consultaprod() {
+
+    public int consultaprod() {
         int ID = 0;
         try (ResultSet rs = st.executeQuery("SELECT Producto_ID FROM productos order by Producto_ID desc limit 1")) {
             while (rs.next()) {
@@ -333,10 +342,26 @@ public class Conexion {
         }
         return ID;
     }
-    public boolean AgregarProducto(int Producto_ID, String nombre, String descripcion, int precio, int UnidadMedida, String categoria) {
+
+    public int RequiPend(String id) {
+        int idbusc = 1;
+        String est = "Activo";
+        try (ResultSet rs = st.executeQuery("SELECT count(Proveedores_ID) FROM requisiciones"
+                + " where Proveedores_ID=" + id + " and Estado='" + est + "'")) {
+            while (rs.next()) {
+                idbusc = rs.getInt("count(Proveedores_ID)");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idbusc;
+    }
+
+    public boolean AgregarProducto(int Producto_ID, String nombre, String descripcion,
+            int precio, int UnidadMedida, String categoria, String Proveedor) {
         String insert;
         insert = "insert into Productos(Producto_ID,nombre,"
-                + "descripcion,precio,UnidadMedida,Categoria) values(?,?,?,?,?,?)";
+                + "descripcion,precio,UnidadMedida,Categoria,Proveedores_ID) values(?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         try {
             cnn.setAutoCommit(false);
@@ -347,6 +372,7 @@ public class Conexion {
             ps.setInt(4, precio);
             ps.setInt(5, UnidadMedida);
             ps.setString(6, categoria);
+            ps.setString(7, Proveedor);
             ps.executeUpdate();
             cnn.commit();
             return true;
@@ -362,22 +388,21 @@ public class Conexion {
         return false;
     }
 
-    public boolean requisiciones(int Requisicion_ID, int Usuario_ID, int Proveedores_ID, double Monto,
+    public boolean requisiciones(int Requisicion_ID, int Usuario_ID, double Monto,
             String FechaRequisicion, String DetalleRequisicion, String Estado) {
         String insert;
         insert = "insert into requisiciones(Requisicion_ID,Usuario_ID,"
-                + "Proveedores_ID,Monto,FechaRequisicion,DetalleRequisicion,Estado) values(?,?,?,?,?,?,?)";
+                + "Monto,FechaRequisicion,DetalleRequisicion,Estado) values(?,?,?,?,?,?)";
         PreparedStatement ps = null;
         try {
             cnn.setAutoCommit(false);
             ps = cnn.prepareStatement(insert);
             ps.setInt(1, Requisicion_ID);
             ps.setInt(2, Usuario_ID);
-            ps.setInt(3, Proveedores_ID);
-            ps.setDouble(4, Monto);
-            ps.setString(5, FechaRequisicion);
-            ps.setString(6, DetalleRequisicion);
-            ps.setString(7, Estado);
+            ps.setDouble(3, Monto);
+            ps.setString(4, FechaRequisicion);
+            ps.setString(5, DetalleRequisicion);
+            ps.setString(6, Estado);
             ps.executeUpdate();
             cnn.commit();
             return true;
@@ -393,11 +418,11 @@ public class Conexion {
         return false;
     }
 
-    public boolean productosrequisiciones(int Requisicion_ID, int Usuario_ID, int Producto_ID, int Cantidad,
-            float TotalArticulo) {
+    public boolean productosrequisiciones(int Requisicion_ID, int Usuario_ID, 
+            int Producto_ID, int Cantidad,float TotalArticulo,int Proveedor_ID, String estado) {
         String insert;
         insert = "insert into productosrequisiciones(Requisicion_ID,Usuario_ID,"
-                + "Producto_ID,Cantidad,TotalArticulo) values(?,?,?,?,?)";
+                + "Producto_ID,Cantidad,TotalArticulo,Proveedores_ID,Estado) values(?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         try {
             cnn.setAutoCommit(false);
@@ -407,6 +432,8 @@ public class Conexion {
             ps.setInt(3, Producto_ID);
             ps.setInt(4, Cantidad);
             ps.setFloat(5, TotalArticulo);
+            ps.setInt(6, Proveedor_ID);
+            ps.setString(7,estado);
             ps.executeUpdate();
             cnn.commit();
             return true;
@@ -547,7 +574,8 @@ public class Conexion {
         }
         return false;
     }
-     public boolean eliminarPro(String Proveedores_ID) {
+
+    public boolean eliminarPro(int Proveedores_ID) {
         String delete = "delete from proveedores where Proveedores_ID=" + Proveedores_ID + "";
         PreparedStatement ps = null;
         try {

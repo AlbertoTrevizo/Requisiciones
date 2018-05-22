@@ -6,6 +6,7 @@
 package requisiciones;
 
 import BD.Conexion;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,7 +30,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         modelo.addColumn("Item");
         modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
-        modelo.addColumn("Observaciones");
+        modelo.addColumn("ID del proveedor");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Costo Unitario");
         modelo.addColumn("Costo Total");
@@ -64,6 +65,8 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         btnRequi = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtProveedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +75,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item", "Codigo", "Descripcion", "Observaciones", "Cantidad", "Costo unitario", "Costo total"
+                "Item", "Codigo", "Descripcion", "ID del Proveedor", "Cantidad", "Costo unitario", "Costo total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -93,6 +96,12 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Buscar");
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +153,10 @@ public class RealizarRequisicion extends javax.swing.JFrame {
 
         jLabel3.setText("$");
 
+        jLabel4.setText("Proveedor ID");
+
+        txtProveedor.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +181,12 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                             .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUnidad))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegresar)
@@ -200,8 +218,15 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,6 +258,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cantidad = null;
         String string = "";
+        
         int comp;
         do {
             cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
@@ -259,6 +285,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                     txtDescripcion.setText((String) datos[2]);
                     txtPrecio.setText((String) datos[3]);
                     txtUnidad.setText((String) datos[4]);
+                    txtProveedor.setText((String)datos[6]);
                 }
                 txtUnidad.setText(cantidad);
             }
@@ -301,7 +328,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
             fila[0] = i;
             fila[1] = txtCodigo.getText();
             fila[2] = txtDescripcion.getText();
-            fila[3] = "";
+            fila[3] = txtProveedor.getText();
             fila[4] = txtUnidad.getText();
             fila[5] = txtPrecio.getText();
             fila[6] = "" + (Integer.parseInt(txtUnidad.getText()) * Integer.parseInt(txtPrecio.getText()));
@@ -316,6 +343,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
             lblTotal.setText("" + total);
             txtCodigo.setText("");
             txtDescripcion.setText("");
+            txtProveedor.setText("");
             txtUnidad.setText("");
             txtPrecio.setText("");
             txtNombre.setText("");
@@ -331,7 +359,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         DetalleRequisicion = JOptionPane.showInputDialog(null, "Ingrese una nota a la requisicion");
         Requisicion_ID = consultas.requiID() + 1;
         Usuario_ID = 0;
-        Proveedores_ID = 2;
+        Proveedores_ID = 0;
         Monto = total;
         java.util.Date fecha1 = new java.util.Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -339,7 +367,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         Estado = "Pendiente";
 
         if (consultas.requisiciones(Requisicion_ID, Usuario_ID,
-                Proveedores_ID, Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {
+                Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {
             JOptionPane.showMessageDialog(null, "La requisicion de realizo de manera exitosa");
         } else {
             JOptionPane.showMessageDialog(null, "La requisicion no se realizo de manera exitosa");
@@ -351,10 +379,12 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
             item = Integer.parseInt("" + tblRequisicion.getValueAt(j, 0));
             codigo = Integer.parseInt("" + tblRequisicion.getValueAt(j, 1));
+            Proveedores_ID = Integer.parseInt(""+tblRequisicion.getValueAt(j,3));
             cantidad = Integer.parseInt("" + tblRequisicion.getValueAt(j, 4));
             costototal = Float.parseFloat("" + tblRequisicion.getValueAt(j, 6));
 
-            if (consultas.productosrequisiciones(Requisicion_ID, Usuario_ID, codigo, cantidad, costototal)) {
+            if (consultas.productosrequisiciones(Requisicion_ID, Usuario_ID,
+                    codigo, cantidad, costototal,Proveedores_ID,Estado)) {
                 JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " fue agregado "
                         + "correctamente a la requisicion");
             } else {
@@ -365,6 +395,13 @@ public class RealizarRequisicion extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnRequiActionPerformed
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+          char Tecla=evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -411,6 +448,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -421,6 +459,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtProveedor;
     private javax.swing.JTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

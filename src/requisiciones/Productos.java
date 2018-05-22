@@ -7,6 +7,7 @@ package requisiciones;
 
 import BD.Conexion;
 import com.mxrck.autocompleter.TextAutoCompleter;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -69,12 +70,12 @@ public class Productos extends javax.swing.JFrame {
         txtDescripcionM = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         txtPrecioM = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
         txtUnidadM = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         cbCategoriaM = new javax.swing.JComboBox<>();
         btnModificar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         txtEliminar = new javax.swing.JTextField();
@@ -86,7 +87,6 @@ public class Productos extends javax.swing.JFrame {
         txtDescripcionE = new javax.swing.JTextArea();
         jLabel21 = new javax.swing.JLabel();
         txtPrecioE = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
         txtUnidadE = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         cbCategoriaE = new javax.swing.JComboBox<>();
@@ -94,6 +94,7 @@ public class Productos extends javax.swing.JFrame {
         lblEstatado = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         lblRequisicion = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -116,6 +117,7 @@ public class Productos extends javax.swing.JFrame {
         });
 
         txtDescripcion.setColumns(20);
+        txtDescripcion.setLineWrap(true);
         txtDescripcion.setRows(5);
         txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -226,6 +228,12 @@ public class Productos extends javax.swing.JFrame {
 
         jLabel7.setText("Buscar");
 
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+
         jLabel13.setText("Nombre");
 
         txtNombreM.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -237,6 +245,7 @@ public class Productos extends javax.swing.JFrame {
         jLabel14.setText("Descripcion");
 
         txtDescripcionM.setColumns(20);
+        txtDescripcionM.setLineWrap(true);
         txtDescripcionM.setRows(5);
         txtDescripcionM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -252,8 +261,6 @@ public class Productos extends javax.swing.JFrame {
                 txtPrecioMKeyTyped(evt);
             }
         });
-
-        jLabel16.setText("Unidad");
 
         txtUnidadM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -279,6 +286,8 @@ public class Productos extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Unidad de Medida");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -286,6 +295,9 @@ public class Productos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnModificar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -296,22 +308,21 @@ public class Productos extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel13)
-                                    .addComponent(jLabel16)
                                     .addComponent(jLabel15)
                                     .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombreM)
-                                    .addComponent(jScrollPane3)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                                     .addComponent(txtPrecioM)
-                                    .addComponent(txtUnidadM, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                                     .addComponent(txtBuscar))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar)))
-                        .addGap(0, 65, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnModificar)))
+                                .addComponent(btnBuscar))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUnidadM, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 65, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -336,8 +347,8 @@ public class Productos extends javax.swing.JFrame {
                     .addComponent(txtPrecioM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtUnidadM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUnidadM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
@@ -350,6 +361,12 @@ public class Productos extends javax.swing.JFrame {
         jTabbedPane1.addTab("Modificar Producto", jPanel2);
 
         jLabel18.setText("Buscar");
+
+        txtEliminar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEliminarKeyTyped(evt);
+            }
+        });
 
         btnBuscarE.setText("Buscar");
         btnBuscarE.addActionListener(new java.awt.event.ActionListener() {
@@ -366,14 +383,13 @@ public class Productos extends javax.swing.JFrame {
 
         txtDescripcionE.setEditable(false);
         txtDescripcionE.setColumns(20);
+        txtDescripcionE.setLineWrap(true);
         txtDescripcionE.setRows(5);
         jScrollPane4.setViewportView(txtDescripcionE);
 
         jLabel21.setText("Precio");
 
         txtPrecioE.setEditable(false);
-
-        jLabel22.setText("Unidad");
 
         txtUnidadE.setEditable(false);
 
@@ -392,6 +408,8 @@ public class Productos extends javax.swing.JFrame {
 
         lblRequisicion.setText(".");
 
+        jLabel9.setText("Unidad de Medida");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -399,6 +417,9 @@ public class Productos extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEliminar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -415,14 +436,12 @@ public class Productos extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel20)
                                     .addComponent(jLabel19)
-                                    .addComponent(jLabel22)
                                     .addComponent(jLabel21))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombreE)
-                                    .addComponent(jScrollPane4)
-                                    .addComponent(txtPrecioE)
-                                    .addComponent(txtUnidadE, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                                    .addComponent(txtPrecioE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -431,11 +450,12 @@ public class Productos extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel25)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblRequisicion)))))
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEliminar)))
+                                        .addComponent(lblRequisicion))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUnidadE, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 38, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -463,14 +483,14 @@ public class Productos extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(txtPrecioE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
                     .addComponent(txtUnidadE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(cbCategoriaE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(btnEliminar)
                 .addContainerGap())
         );
@@ -483,7 +503,7 @@ public class Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String Nombre, Descripcion, Categoria = null;
+        String Nombre, Descripcion, Categoria = null,Proveedor=null;
         int precio, unidad, ID;
 
         ID = Integer.parseInt(txtID.getText());
@@ -492,8 +512,9 @@ public class Productos extends javax.swing.JFrame {
         Categoria = cbCategoria.toString();
         precio = Integer.parseInt(txtPrecio.getText());
         unidad = Integer.parseInt(txtUnidad.getText());
+        Proveedor=cbProveedor.toString();
 
-        if (consultas.AgregarProducto(ID, Nombre, Descripcion, precio, unidad, "1")) {
+        if (consultas.AgregarProducto(ID, Nombre, Descripcion, precio, unidad, Categoria,Proveedor)) {
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
             txtID.setText("");
             txtNombre.setText("");
@@ -673,6 +694,20 @@ public class Productos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUnidadMKeyTyped
 
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        char Tecla = evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void txtEliminarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEliminarKeyTyped
+        char Tecla = evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            btnBuscarE.doClick();
+        }
+    }//GEN-LAST:event_txtEliminarKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -722,14 +757,12 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
@@ -738,6 +771,8 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

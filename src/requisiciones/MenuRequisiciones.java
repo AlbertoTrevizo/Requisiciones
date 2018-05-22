@@ -6,6 +6,7 @@
 package requisiciones;
 
 import BD.Conexion;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -131,6 +132,12 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
+            }
+        });
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
             }
         });
 
@@ -308,6 +315,13 @@ public class MenuRequisiciones extends javax.swing.JFrame {
     private void btnCatalogoRequisicionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoRequisicionesActionPerformed
         new CatalogoRequisiciones().setVisible(true);
     }//GEN-LAST:event_btnCatalogoRequisicionesActionPerformed
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+          char Tecla=evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
 
     /**
      * @param args the command line arguments

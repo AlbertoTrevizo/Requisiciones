@@ -6,6 +6,7 @@
 package requisiciones;
 
 import BD.Conexion;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -191,10 +192,10 @@ public class Proveedores extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                        .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtProveedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                         .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -208,8 +209,8 @@ public class Proveedores extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 173, Short.MAX_VALUE)))
+                                    .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -255,6 +256,12 @@ public class Proveedores extends javax.swing.JFrame {
         jTabbedPane1.addTab("Agregar Proveedor", jPanel1);
 
         jLabel9.setText("Buscar :");
+
+        txtBuscarM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarMKeyTyped(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -348,31 +355,31 @@ public class Proveedores extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel17)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtIDProM))
+                                    .addComponent(txtIDProM, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel15)
                                     .addGap(32, 32, 32)
-                                    .addComponent(txtRFCM))
+                                    .addComponent(txtRFCM, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel14)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtFormaPagoM))
+                                    .addComponent(txtFormaPagoM, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel13)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtTelefonoM))
+                                    .addComponent(txtTelefonoM, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel12)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtDireccionM, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtDireccionM, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel11)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtNombreM))
+                                    .addComponent(txtNombreM, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel10)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtProveedorM))))
+                                    .addComponent(txtProveedorM, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))))
                         .addGap(0, 111, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -464,6 +471,12 @@ public class Proveedores extends javax.swing.JFrame {
 
         jLabel26.setText("Buscar :");
 
+        txtBuscarE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarEKeyTyped(evt);
+            }
+        });
+
         btnBuscarE.setText("Buscar");
         btnBuscarE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -495,33 +508,33 @@ public class Proveedores extends javax.swing.JFrame {
                                 .addComponent(cbEstadoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel25)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtIDProE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel19)
                                     .addGap(32, 32, 32)
-                                    .addComponent(txtRFCE))
+                                    .addComponent(txtRFCE, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel20)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtFormaPagoE))
+                                    .addComponent(txtFormaPagoE, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel21)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtTelefonoE))
+                                    .addComponent(txtTelefonoE, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel22)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtDireccionE, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtDireccionE, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel23)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtNombreE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel24)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtProveedorE))))
+                                    .addComponent(txtNombreE, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtIDProE, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtProveedorE, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 111, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -652,7 +665,7 @@ public class Proveedores extends javax.swing.JFrame {
             if (comp.equals("Activo")) {
                 cbEstadoM.setSelectedIndex(0);
             } else {
-                cbEstadoM.setSelectedItem(1);
+                cbEstadoM.setSelectedIndex(1);
             }
         }
 
@@ -708,24 +721,25 @@ public class Proveedores extends javax.swing.JFrame {
             if (comp.equals("Activo")) {
                 cbEstadoE.setSelectedIndex(0);
             } else {
-                cbEstadoE.setSelectedItem(1);
+                cbEstadoE.setSelectedIndex(1);
             }
         }
     }//GEN-LAST:event_btnBuscarEActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        String ID = txtBuscarM.getText();
-        String consultID, comp;
-        consultID = consultas.consultPro(ID);
+        int ID = Integer.parseInt(txtBuscarE.getText());
 
-        if (consultID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
-        } else if (consultas.eliminarPro(consultID) && "Inactivo".equals(est)) {
+        if (consultas.RequiPend("" + ID) > 0) {
+            JOptionPane.showMessageDialog(null, "Lo sentimos, el proveedor no puede ser eliminado\n"
+                    + "El proveedor se encuentra en una requisicion en proceso");
+        } else if (consultas.eliminarPro(ID) && "Inactivo".equals(est)) {
             JOptionPane.showMessageDialog(null, "El proveedor pudo ser eliminado");
         } else {
             JOptionPane.showMessageDialog(null, "El proveedor no pudo ser eliminado");
             JOptionPane.showMessageDialog(null, "Compruebe que se encuentra Inactivo para poder eliminarlo");
         }
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -780,8 +794,8 @@ public class Proveedores extends javax.swing.JFrame {
             evt.consume();
             getToolkit().beep();
         }
-           char c= evt.getKeyChar();
-        if(Character.isDigit(c)){
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -827,6 +841,20 @@ public class Proveedores extends javax.swing.JFrame {
             getToolkit().beep();
         }
     }//GEN-LAST:event_txtFormaPagoMKeyTyped
+
+    private void txtBuscarMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarMKeyTyped
+        char Tecla = evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            btnBuscar.doClick();
+        }
+    }//GEN-LAST:event_txtBuscarMKeyTyped
+
+    private void txtBuscarEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarEKeyTyped
+        char Tecla = evt.getKeyChar();
+        if (Tecla == KeyEvent.VK_ENTER) {
+            btnBuscarE.doClick();
+        }
+    }//GEN-LAST:event_txtBuscarEKeyTyped
 
     /**
      * @param args the command line arguments
