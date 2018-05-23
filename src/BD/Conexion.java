@@ -345,11 +345,22 @@ public class Conexion {
 
     public int RequiPend(String id) {
         int idbusc = 1;
-        String est = "Activo";
-        try (ResultSet rs = st.executeQuery("SELECT count(Proveedores_ID) FROM requisiciones"
-                + " where Proveedores_ID=" + id + " and Estado='" + est + "'")) {
+        try (ResultSet rs = st.executeQuery("SELECT count(Proveedores_ID) FROM productosrequisiciones"
+                + " where Proveedores_ID=" + id)) {
             while (rs.next()) {
                 idbusc = rs.getInt("count(Proveedores_ID)");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idbusc;
+    }
+        public int ProPend(String id) {
+        int idbusc = 1;
+        try (ResultSet rs = st.executeQuery("SELECT count(Producto_ID) FROM productosrequisiciones"
+                + " where Producto_ID=" + id)) {
+            while (rs.next()) {
+                idbusc = rs.getInt("count(Producto_ID)");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -595,7 +606,28 @@ public class Conexion {
         }
         return false;
     }
-
+   public boolean eliminarprorequi(int Proveedores_ID) {
+       String act = "Pendiente";
+        String delete = "delete from productosrequisiciones where Proveedores_ID=" + Proveedores_ID + " "
+                + "and Estado='"+act+"'";
+        PreparedStatement ps = null;
+        try {
+            cnn.setAutoCommit(false);
+            ps = cnn.prepareStatement(delete);
+            ps.executeUpdate();
+            cnn.commit();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
     public String ObtenerUsuario() {
         return usuariof;
     }

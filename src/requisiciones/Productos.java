@@ -92,8 +92,6 @@ public class Productos extends javax.swing.JFrame {
         cbCategoriaE = new javax.swing.JComboBox<>();
         btnEliminar = new javax.swing.JButton();
         lblEstatado = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        lblRequisicion = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -404,10 +402,6 @@ public class Productos extends javax.swing.JFrame {
             }
         });
 
-        jLabel25.setText("¿En Requisicion?");
-
-        lblRequisicion.setText(".");
-
         jLabel9.setText("Unidad de Medida");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -442,20 +436,13 @@ public class Productos extends javax.swing.JFrame {
                                     .addComponent(txtNombreE)
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                                     .addComponent(txtPrecioE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(39, 39, 39)
-                                        .addComponent(lblEstatado))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel25)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblRequisicion))))
+                                .addGap(49, 49, 49)
+                                .addComponent(lblEstatado))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtUnidadE, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 38, Short.MAX_VALUE)))
+                        .addGap(0, 55, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -474,10 +461,7 @@ public class Productos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel25)
-                        .addComponent(lblRequisicion)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
@@ -509,10 +493,10 @@ public class Productos extends javax.swing.JFrame {
         ID = Integer.parseInt(txtID.getText());
         Nombre = txtNombre.getText();
         Descripcion = txtDescripcion.getText();
-        Categoria = cbCategoria.toString();
+        Categoria = cbCategoria.getSelectedItem().toString();
         precio = Integer.parseInt(txtPrecio.getText());
         unidad = Integer.parseInt(txtUnidad.getText());
-        Proveedor=cbProveedor.toString();
+        Proveedor=cbProveedor.getSelectedItem().toString();
 
         if (consultas.AgregarProducto(ID, Nombre, Descripcion, precio, unidad, Categoria,Proveedor)) {
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
@@ -566,8 +550,9 @@ public class Productos extends javax.swing.JFrame {
         descripcion = txtDescripcionM.getText();
         precio = Integer.parseInt(txtPrecioM.getText());
         unidadMedida = Integer.parseInt(txtUnidadM.getText());
+        categoria=cbCategoriaM.getSelectedItem().toString();
 
-        if (consultas.Modificar(ID, nombre, descripcion, precio, unidadMedida, "1")) {
+        if (consultas.Modificar(ID, nombre, descripcion, precio, unidadMedida, categoria)) {
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Los datos no pudieron ser guardados", "Error", JOptionPane.ERROR_MESSAGE);
@@ -609,11 +594,16 @@ public class Productos extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int ID = Integer.parseInt(txtEliminar.getText());
 
-        if (consultas.eliminarProductos(ID)) {
+        if((consultas.ProPend("" + ID) > 0)){
+            JOptionPane.showMessageDialog(null, "Lo sentimos, el producto no puede ser eliminado\n"
+                    + "El producto se encuentra en una requisicion en proceso");
+        }  else if (consultas.eliminarProductos(ID)) {
             JOptionPane.showMessageDialog(null, "Se ha eliminado el producto de manera correcta");
         } else {
             JOptionPane.showMessageDialog(null, "Hubo un problema eliminando el producto");
         }
+        
+      
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -764,7 +754,6 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
@@ -781,7 +770,6 @@ public class Productos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblEstatado;
-    private javax.swing.JLabel lblRequisicion;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextArea txtDescripcionE;
