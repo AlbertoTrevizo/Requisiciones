@@ -10,28 +10,26 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import requisiciones.panels.SignUp;
 
 /**
  *
  * @author beto
  */
 public class Requisiciones extends javax.swing.JFrame {
-    SignIn si = new SignIn();
-    SignUp su = new SignUp();
+
     //Boolean pnlLogInActive = Boolean.TRUE;
-    public Conexion cone=new Conexion();
+    public Conexion cone = new Conexion();
     public String usuarioid;
+
     public Requisiciones() {
         initComponents();
         setLocationRelativeTo(null);
-       /** si.setBounds(0, 0, 460, 540);
-        si.setVisible(Boolean.TRUE);
-        pnlRight.add(si);
-       */
+        /**
+         * si.setBounds(0, 0, 460, 540); si.setVisible(Boolean.TRUE);
+         * pnlRight.add(si);
+         */
     }
-    
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +62,7 @@ public class Requisiciones extends javax.swing.JFrame {
         pnlLeft.setPreferredSize(new java.awt.Dimension(460, 540));
 
         lblIcon.setBackground(new java.awt.Color(36, 47, 65));
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/user.png"))); // NOI18N
 
         lblTitle.setBackground(new java.awt.Color(36, 47, 65));
         lblTitle.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
@@ -81,29 +80,29 @@ public class Requisiciones extends javax.swing.JFrame {
                 .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlLeftLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTitle)
+                        .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pnlLeftLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator2)))
                     .addGroup(pnlLeftLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(78, 78, 78)
                         .addComponent(lblIcon)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(lblTitle)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblIcon)
-                .addGap(54, 54, 54)
+                .addGap(38, 38, 38)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGap(119, 119, 119))
         );
 
         getContentPane().add(pnlLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, -1));
@@ -122,13 +121,13 @@ public class Requisiciones extends javax.swing.JFrame {
 
         lblSignUp.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblSignUp.setForeground(new java.awt.Color(36, 47, 65));
-        lblSignUp.setText("ENTRAR");
+        lblSignUp.setText("         ENTRAR");
         lblSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSignUpMouseClicked(evt);
             }
         });
-        pnlBtnSignIn.add(lblSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        pnlBtnSignIn.add(lblSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 40));
 
         txtPassword.setBackground(new java.awt.Color(36, 47, 65));
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,7 +146,7 @@ public class Requisiciones extends javax.swing.JFrame {
 
         lblPassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(204, 204, 204));
-        lblPassword.setText("CONTRASEÑA");
+        lblPassword.setText("Contraseña");
 
         jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -160,6 +159,11 @@ public class Requisiciones extends javax.swing.JFrame {
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEmailFocusGained(evt);
+            }
+        });
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
             }
         });
 
@@ -211,33 +215,35 @@ public class Requisiciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpMouseClicked
-        String usuario=txtEmail.getText();
-        String pass=txtPassword.getText();
+        String usuario = txtEmail.getText();
+        String pass = txtPassword.getText();
 
-        boolean inicio=false;
-        inicio=cone.login(usuario,pass);
+        boolean inicio = false;
+        inicio = cone.login(usuario, pass);
 
-        if(inicio==true){
+        if (inicio == true) {
             this.setVisible(Boolean.FALSE);
             new Menu().setVisible(true);
-           
-        }else{
+
+        } else {
+            txtEmail.setText("");
             txtPassword.setText("");
             JOptionPane.showMessageDialog(null, "Usuario incorrecto");
         }
     }//GEN-LAST:event_lblSignUpMouseClicked
 
     private void pnlBtnSignInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBtnSignInMouseClicked
-        String usuario=txtEmail.getText();
-        String pass=txtPassword.getText();
+        String usuario = txtEmail.getText();
+        String pass = txtPassword.getText();
 
-        boolean inicio=false;
-        inicio=cone.login(usuario,pass);
+        boolean inicio = false;
+        inicio = cone.login(usuario, pass);
 
-        if(inicio==true){
+        if (inicio == true) {
             this.setVisible(Boolean.FALSE);
             new Menu().setVisible(true);
-        }else{
+        } else {
+            txtEmail.setText("");
             txtPassword.setText("");
             JOptionPane.showMessageDialog(null, "Usuario incorrecto");
         }
@@ -251,21 +257,27 @@ public class Requisiciones extends javax.swing.JFrame {
         txtEmail.setText("");
     }//GEN-LAST:event_txtEmailFocusGained
 
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+
+    }//GEN-LAST:event_txtEmailActionPerformed
+
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-           char Tecla = evt.getKeyChar();
+        char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
-            String usuario=txtEmail.getText();
-            String pass=txtPassword.getText();
+            String usuario = txtEmail.getText();
+            String pass = txtPassword.getText();
 
-            boolean inicio=false;
-            inicio=cone.login(usuario,pass);
+            boolean inicio = false;
+            inicio = cone.login(usuario, pass);
 
-            if(inicio==true){
+            if (inicio == true) {
                 this.setVisible(Boolean.FALSE);
                 new Menu().setVisible(true);
-            }else{
+
+            } else {
+                txtEmail.setText("");
                 txtPassword.setText("");
-                JOptionPane.showMessageDialog(pnlBtnSignIn, "Usuario incorrecto");
+                JOptionPane.showMessageDialog(null, "Usuario incorrecto");
             }
         }
     }//GEN-LAST:event_txtPasswordKeyTyped

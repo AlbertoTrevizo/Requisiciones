@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +26,7 @@ public class Conexion {
     Statement st;
     public Statement st1;
     public String usuariof;
+    public int usuario;
 
     public Conexion() {
         try {
@@ -41,10 +43,11 @@ public class Conexion {
 
     public boolean login(String usuario, String pass) {
         Boolean usu = null;
-        try (ResultSet rs = st.executeQuery("select usuario,password "
+        try (ResultSet rs = st.executeQuery("select Usuario_ID,usuario,password "
                 + "from usuarios where usuario='" + usuario + "' and password='" + pass + "'")) {
             if (rs.next()) {
                 usu = true;
+                this.usuario = Integer.parseInt(rs.getString("Usuario_ID"));
             } else {
                 usu = false;
             }
@@ -120,7 +123,6 @@ public class Conexion {
 
     public DefaultTableModel ProductosRequisicionesTbl(String id) {
         DefaultTableModel model = new DefaultTableModel();
-        
 
         int i = 0;
         model.addColumn("Item");
@@ -168,9 +170,9 @@ public class Conexion {
         model.addColumn("Precio");
         model.addColumn("Unidad de Medida");
         model.addColumn("Categoria");
-        model.addColumn("Proveedor");
+        model.addColumn("ID del proveedor");
         try (ResultSet rs = st.executeQuery("select * from productos")) {
-            Object[] fila = new Object[6];
+            Object[] fila = new Object[7];
             while (rs.next()) {
                 String a = rs.getString("Producto_ID");
                 fila[0] = a;
@@ -184,6 +186,8 @@ public class Conexion {
                 fila[4] = f;
                 String h = rs.getString("Categoria");
                 fila[5] = h;
+                String b = rs.getString("Proveedores_ID");
+                fila[6] = b;
                 model.addRow(fila);
             }
 
@@ -369,6 +373,104 @@ public class Conexion {
         return idbusc;
     }
 
+    public DefaultTableModel requisicionesPorAprobar() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Codigo");
+        model.addColumn("Requisitor");
+        model.addColumn("Monto");
+        model.addColumn("Fecha Creacion");
+        model.addColumn("Detalle");
+        model.addColumn("Estado");
+        model.addColumn("Nivel Actual");
+
+        try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID, usuario, "
+                + "Monto,FechaRequisicion, DetalleRequisicion, Estado, NivelActual "
+                + "FROM requisiciones JOIN usuarios "
+                + "ON requisiciones.Usuario_ID = usuarios.Usuario_ID "
+                + "WHERE requisiciones.NivelActual = "
+                + "(SELECT nivel FROM usuarios WHERE Usuario_ID = " + usuario + ");")) {
+            Object[] fila = new Object[7];
+            System.out.println(""+usuario);
+            while (rs.next()) {
+                fila[0] = rs.getString("Requisicion_ID");
+                fila[1] = rs.getString("usuario");
+                fila[2] = rs.getString("Monto");
+                fila[3] = rs.getString("FechaRequisicion");
+                fila[4] = rs.getString("DetalleRequisicion");
+                fila[5] = rs.getString("Estado");
+                fila[6] = rs.getString("NivelActual");
+                model.addRow(fila);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+
+    public void aprobarRequisicion(int id) {
+
+        Double monto = null;
+        Integer nivel = null;
+        try {
+            ResultSet rs = st.executeQuery("SELECT Monto, NivelActual FROM requisiciones where Requisicion_ID= " + id);
+            if (rs.next()) {
+                monto = rs.getDouble("Monto");
+                nivel = rs.getInt("NivelActual");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (monto != null && nivel != null) {
+
+            String insert = "update requisiciones set Estado =?, NivelActual=?  where Requisicion_ID=" + id;
+            PreparedStatement ps = null;
+            Integer nivelActual = null;
+            String estado = "Pendiente";
+
+            if (nivel > 3) {
+                nivelActual = 0;
+                estado = "aprobado";
+            } else if (nivel > 2 && monto > 100000) {
+                nivelActual = 4;
+            } else if (nivel > 2 && monto <= 100000) {
+                nivelActual = 0;
+                estado = "aprobado";
+            } else if (nivel > 1 && monto > 50000) {
+                nivelActual = 3;
+            } else if (nivel > 1 && monto <= 50000) {
+                nivelActual = 0;
+                estado = "aprobado";
+            } else if (monto > 10000) {
+                nivelActual = 2;
+            } else if (monto <= 10000) {
+                nivelActual = 0;
+                estado = "aprobado";
+            } else {
+                JOptionPane.showConfirmDialog(null, "Error garrafal");
+            }
+            //Falta actualizar tambien el estado en caso de aprobacion
+            try {
+                cnn.setAutoCommit(false);
+                ps = cnn.prepareStatement(insert);
+                ps.setString(1, estado);
+                ps.setInt(2, nivelActual);
+                ps.executeUpdate();
+                cnn.commit();
+            } catch (Exception ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    ps.close();
+                } catch (Exception ex) {
+                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+
+    }
+
     public boolean AgregarProducto(int Producto_ID, String nombre, String descripcion,
             int precio, int UnidadMedida, String categoria, String Proveedor) {
         String insert;
@@ -474,6 +576,80 @@ public class Conexion {
         return idbusc;
     }
 
+    public DefaultTableModel requisicionesEchas() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Codigo");
+        model.addColumn("Requisitor");
+        model.addColumn("Monto");
+        model.addColumn("Fecha Creacion");
+        model.addColumn("Detalle");
+        model.addColumn("Estado");
+        model.addColumn("Nivel Actual");
+
+        try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID, usuario, "
+                + "Monto,FechaRequisicion, DetalleRequisicion, Estado, requisiciones.NivelActual "
+                + "FROM requisiciones JOIN usuarios "
+                + "ON requisiciones.Usuario_ID = usuarios.Usuario_ID "
+                + "WHERE requisiciones.Usuario_ID =" + usuario + ";")) {
+            Object[] fila = new Object[7];
+            while (rs.next()) {
+                fila[0] = rs.getString("Requisicion_ID");
+                fila[1] = rs.getString("usuario");
+                fila[2] = rs.getString("Monto");
+                fila[3] = rs.getString("FechaRequisicion");
+                fila[4] = rs.getString("DetalleRequisicion");
+                fila[5] = rs.getString("Estado");
+                fila[6] = rs.getString("NivelActual");
+                model.addRow(fila);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+
+    public Integer obtenerUsuario() {
+        Integer idbusc = 10;
+        try {
+            ResultSet rs = st.executeQuery("SELECT nivel FROM usuarios where usuario= '" + usuariof + "'");
+            if (rs.next()) {
+                idbusc = rs.getInt("nivel");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idbusc;
+
+    }
+
+    public boolean agregarUsuario(String nombre, String contra, String puesto, int nivel) {
+        String insert;
+        insert = "insert into usuarios(usuario,"
+                + "password,puesto,nivel) values(?,?,?,?)";
+        PreparedStatement ps = null;
+        try {
+            cnn.setAutoCommit(false);
+            ps = cnn.prepareStatement(insert);
+            ps.setString(1, nombre);
+            ps.setString(2, contra);
+            ps.setString(3, puesto);
+            ps.setInt(4, nivel);
+            ps.executeUpdate();
+            cnn.commit();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+
     public boolean AgregarProveedor(int Proveedores_ID, String proveedor,
             String Nombre, String Direccion, String Telefono, String FormaPago,
             String RFC, String Estado) {
@@ -564,6 +740,33 @@ public class Conexion {
             }
         }
         return false;
+    }
+
+    public void rechazarRequisicion(int id) {
+
+        String insert = "update requisiciones set Estado =?, NivelActual=?  where Requisicion_ID=" + id;
+        PreparedStatement ps = null;
+        Integer nivelActual = 0;
+        String estado = "Rechazada";
+
+        //Falta actualizar tambien el estado en caso de aprobacion
+        try {
+            cnn.setAutoCommit(false);
+            ps = cnn.prepareStatement(insert);
+            ps.setString(1, estado);
+            ps.setInt(2, nivelActual);
+            ps.executeUpdate();
+            cnn.commit();
+        } catch (Exception ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
     public boolean eliminarProductos(int Producto_ID) {

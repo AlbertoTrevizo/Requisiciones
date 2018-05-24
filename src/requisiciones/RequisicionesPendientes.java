@@ -6,20 +6,22 @@
 package requisiciones;
 
 import BD.Conexion;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author User
  */
-public class CatalogoProveedores extends javax.swing.JFrame {
+public class RequisicionesPendientes extends javax.swing.JFrame {
 
+    DefaultTableModel modelo = new DefaultTableModel();
     public Conexion consultas = new Conexion();
 
-    public CatalogoProveedores() {
+    public RequisicionesPendientes() {
         initComponents();
         setLocationRelativeTo(null);
-        tblProveedores.removeAll();
-        tblProveedores.setModel(consultas.CatalogoProveedores());
+        tblRequisiciones.removeAll();
+        tblRequisiciones.setModel(consultas.requisicionesEchas());
     }
 
     /**
@@ -33,40 +35,40 @@ public class CatalogoProveedores extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProveedores = new javax.swing.JTable();
-        lblMenu = new javax.swing.JLabel();
+        tblRequisiciones = new javax.swing.JTable();
+        lblMenu4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(36, 47, 65));
 
-        tblProveedores.setModel(new javax.swing.table.DefaultTableModel(
+        tblRequisiciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Proveedor", "Nombre", "Direccion", "Telefono", "Forma de pago", "RFC", "Estado"
+                "Codigo", "Requisitor", "Monto", "Fecha creacion", "Detalles", "Estado", "Nivel de Aprobacion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblProveedores);
+        jScrollPane1.setViewportView(tblRequisiciones);
 
-        lblMenu.setBackground(new java.awt.Color(255, 255, 255));
-        lblMenu.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Proveedor.png"))); // NOI18N
-        lblMenu.setText("Menu Proveedores");
-        lblMenu.setIconTextGap(7);
-        lblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblMenu4.setBackground(new java.awt.Color(255, 255, 255));
+        lblMenu4.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblMenu4.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/home.png"))); // NOI18N
+        lblMenu4.setText("Menu principal");
+        lblMenu4.setIconTextGap(7);
+        lblMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblMenuMouseClicked(evt);
+                lblMenu4MouseClicked(evt);
             }
         });
 
@@ -77,9 +79,9 @@ public class CatalogoProveedores extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblMenu)
+                        .addComponent(lblMenu4)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -87,29 +89,32 @@ public class CatalogoProveedores extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblMenu4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
+    private void lblMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenu4MouseClicked
+        new Menu().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_lblMenuMouseClicked
+    }//GEN-LAST:event_lblMenu4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -128,20 +133,20 @@ public class CatalogoProveedores extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CatalogoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RequisicionesPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CatalogoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RequisicionesPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CatalogoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RequisicionesPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CatalogoProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RequisicionesPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CatalogoProveedores().setVisible(true);
+                new RequisicionesPendientes().setVisible(true);
             }
         });
     }
@@ -149,7 +154,7 @@ public class CatalogoProveedores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMenu;
-    private javax.swing.JTable tblProveedores;
+    private javax.swing.JLabel lblMenu4;
+    private javax.swing.JTable tblRequisiciones;
     // End of variables declaration//GEN-END:variables
 }
