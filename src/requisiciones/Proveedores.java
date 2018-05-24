@@ -651,7 +651,7 @@ public class Proveedores extends javax.swing.JFrame {
         String consultID, comp;
         consultID = consultas.consultPro(ID);
         if (consultID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+            JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
         } else {
             Object datos[] = consultas.resultadPro(ID);
             txtIDProM.setText((String) datos[0]);
@@ -706,7 +706,7 @@ public class Proveedores extends javax.swing.JFrame {
         String consultID, comp;
         consultID = consultas.consultPro(ID);
         if (consultID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+            JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
         } else {
             Object datos[] = consultas.resultadPro(ID);
             txtIDProE.setText((String) datos[0]);
@@ -734,6 +734,11 @@ public class Proveedores extends javax.swing.JFrame {
                     + "El proveedor se encuentra en una requisicion en proceso");
         } else if (consultas.eliminarPro(ID) && "Inactivo".equals(est)) {
             JOptionPane.showMessageDialog(null, "El proveedor pudo ser eliminado");
+            txtIDProE.setText("");txtProveedorE.setText("");
+            txtNombreE.setText("");txtDireccionE.setText("");
+            txtTelefonoE.setText("");txtFormaPagoE.setText("");
+            txtRFCE.setText("");cbEstadoE.setSelectedIndex(0);
+            txtBuscarE.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "El proveedor no pudo ser eliminado");
             JOptionPane.showMessageDialog(null, "Compruebe que se encuentra Inactivo para poder eliminarlo");

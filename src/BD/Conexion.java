@@ -120,17 +120,19 @@ public class Conexion {
 
     public DefaultTableModel ProductosRequisicionesTbl(String id) {
         DefaultTableModel model = new DefaultTableModel();
+        
+
         int i = 0;
         model.addColumn("Item");
         model.addColumn("Codigo");
         model.addColumn("Descripcion");
-        // model.addColumn("Observaciones");
+        model.addColumn("ID del proveedor");
         model.addColumn("Cantidad");
         model.addColumn("Costo Unitario");
         model.addColumn("Costo Total");
 
         try (ResultSet rs = st.executeQuery("SELECT t1.Requisicion_ID,t1.Producto_ID,t1.Cantidad,t1.TotalArticulo,"
-                + "t2.descripcion,t2.precio"
+                + "t2.descripcion,t2.precio,t2.Proveedores_ID"
                 + " FROM productosrequisiciones as t1 inner join productos as t2 on Requisicion_ID=" + id + " and "
                 + "t1.Producto_ID=t2.Producto_ID")) {
             Object[] fila = new Object[7];
@@ -141,12 +143,14 @@ public class Conexion {
                 fila[1] = d;
                 String e = rs.getString("t2.descripcion");
                 fila[2] = e;
+                String a = rs.getString("t2.Proveedores_ID");
+                fila[3] = a;
                 String g = rs.getString("t1.Cantidad");
-                fila[3] = g;
+                fila[4] = g;
                 String f = rs.getString("t2.precio");
-                fila[4] = f;
+                fila[5] = f;
                 String h = rs.getString("t1.TotalArticulo");
-                fila[5] = h;
+                fila[6] = h;
                 model.addRow(fila);
             }
 
@@ -193,7 +197,6 @@ public class Conexion {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Requisicion_ID");
         model.addColumn("Usuario_ID");
-        model.addColumn("Proveedores_ID");
         model.addColumn("Monto");
         model.addColumn("Fecha Requisición");
         model.addColumn("Detalle Requisición");
@@ -205,14 +208,12 @@ public class Conexion {
                 fila[0] = a;
                 String d = rs.getString("Usuario_ID");
                 fila[1] = d;
-                String e = rs.getString("Proveedores_ID");
-                fila[2] = e;
                 String g = rs.getString("Monto");
-                fila[3] = g;
+                fila[2] = g;
                 String f = rs.getString("FechaRequisicion");
-                fila[4] = f;
+                fila[3] = f;
                 String h = rs.getString("DetalleRequisicion");
-                fila[5] = h;
+                fila[4] = h;
                 String i = rs.getString("Estado");
                 fila[5] = i;
                 model.addRow(fila);
@@ -301,17 +302,16 @@ public class Conexion {
     }
 
     public Object[] resultadosrequi(String id) {
-        String infor[] = new String[7];
-        try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID,Usuario_ID,Proveedores_ID"
+        String infor[] = new String[6];
+        try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID,Usuario_ID"
                 + ",Monto,FechaRequisicion,DetalleRequisicion,Estado FROM requisiciones where Requisicion_ID=" + id)) {
             while (rs.next()) {
                 infor[0] = rs.getString("Requisicion_ID");
                 infor[1] = rs.getString("Usuario_ID");
-                infor[2] = rs.getString("Proveedores_ID");
-                infor[3] = rs.getString("Monto");
-                infor[4] = rs.getString("FechaRequisicion");
-                infor[5] = rs.getString("DetalleRequisicion");
-                infor[6] = rs.getString("Estado");
+                infor[2] = rs.getString("Monto");
+                infor[3] = rs.getString("FechaRequisicion");
+                infor[4] = rs.getString("DetalleRequisicion");
+                infor[5] = rs.getString("Estado");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -355,7 +355,8 @@ public class Conexion {
         }
         return idbusc;
     }
-        public int ProPend(String id) {
+
+    public int ProPend(String id) {
         int idbusc = 1;
         try (ResultSet rs = st.executeQuery("SELECT count(Producto_ID) FROM productosrequisiciones"
                 + " where Producto_ID=" + id)) {
@@ -429,8 +430,8 @@ public class Conexion {
         return false;
     }
 
-    public boolean productosrequisiciones(int Requisicion_ID, int Usuario_ID, 
-            int Producto_ID, int Cantidad,float TotalArticulo,int Proveedor_ID, String estado) {
+    public boolean productosrequisiciones(int Requisicion_ID, int Usuario_ID,
+            int Producto_ID, int Cantidad, float TotalArticulo, int Proveedor_ID, String estado) {
         String insert;
         insert = "insert into productosrequisiciones(Requisicion_ID,Usuario_ID,"
                 + "Producto_ID,Cantidad,TotalArticulo,Proveedores_ID,Estado) values(?,?,?,?,?,?,?)";
@@ -444,7 +445,7 @@ public class Conexion {
             ps.setInt(4, Cantidad);
             ps.setFloat(5, TotalArticulo);
             ps.setInt(6, Proveedor_ID);
-            ps.setString(7,estado);
+            ps.setString(7, estado);
             ps.executeUpdate();
             cnn.commit();
             return true;
@@ -606,10 +607,11 @@ public class Conexion {
         }
         return false;
     }
-   public boolean eliminarprorequi(int Proveedores_ID) {
-       String act = "Pendiente";
+
+    public boolean eliminarprorequi(int Proveedores_ID) {
+        String act = "Pendiente";
         String delete = "delete from productosrequisiciones where Proveedores_ID=" + Proveedores_ID + " "
-                + "and Estado='"+act+"'";
+                + "and Estado='" + act + "'";
         PreparedStatement ps = null;
         try {
             cnn.setAutoCommit(false);
@@ -628,6 +630,7 @@ public class Conexion {
         }
         return false;
     }
+
     public String ObtenerUsuario() {
         return usuariof;
     }

@@ -44,7 +44,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRequisicion = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
@@ -53,7 +52,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         lblFechaRea = new javax.swing.JLabel();
         lblFechaAprob = new javax.swing.JLabel();
         lblEstatus = new javax.swing.JLabel();
-        lblProveedor = new javax.swing.JLabel();
         lblRequisitor = new javax.swing.JLabel();
         lblDepartamento = new javax.swing.JLabel();
         lblMotivo = new javax.swing.JLabel();
@@ -79,14 +77,12 @@ public class MenuRequisiciones extends javax.swing.JFrame {
 
         jLabel10.setText("Estatus");
 
-        jLabel11.setText("Proveedor");
-
         tblRequisicion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item", "Codigo", "Descripcion", "Observaciones", "Cantidad", "Costo unitario", "Costo total"
+                "Item", "Codigo", "Descripcion", "ID del proveedor", "Cantidad", "Costo unitario", "Costo total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -95,6 +91,12 @@ public class MenuRequisiciones extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblRequisicion.getTableHeader().setReorderingAllowed(false);
+        tblRequisicion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRequisicionMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblRequisicion);
@@ -119,8 +121,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         lblFechaAprob.setText(".");
 
         lblEstatus.setText(".");
-
-        lblProveedor.setText(".");
 
         lblRequisitor.setText(".");
 
@@ -159,17 +159,26 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(63, 63, 63)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotal)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCatalogoRequisiciones)
+                        .addGap(31, 514, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblRequisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -199,34 +208,18 @@ public class MenuRequisiciones extends javax.swing.JFrame {
                                         .addComponent(lblFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap(98, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCatalogoRequisiciones)
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblRequisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
-                        .addContainerGap())))
+                                .addComponent(lblTotal)
+                                .addGap(93, 93, 93))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,23 +255,21 @@ public class MenuRequisiciones extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(lblEstatus))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(lblProveedor))))
+                            .addComponent(lblEstatus))))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel12)
-                        .addComponent(lblTotal)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnCatalogoRequisiciones))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCatalogoRequisiciones)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(lblTotal))))
                 .addContainerGap())
         );
 
@@ -301,14 +292,14 @@ public class MenuRequisiciones extends javax.swing.JFrame {
             Object datos[] = consultas.resultadosrequi(buscID);
             lblFolio.setText(buscID);
             lblRequisitor.setText((String) datos[1]);
-            lblProveedor.setText((String) datos[2]);
-            lblTotal.setText((String) datos[3]);
-            lblFechaRea.setText((String)datos[4]);
-            lblMotivo.setText((String)datos[5]);
-            lblEstatus.setText((String) datos[6]);
+            lblTotal.setText((String) datos[2]);
+            lblFechaRea.setText((String)datos[3]);
+            lblMotivo.setText((String)datos[4]);
+            lblEstatus.setText((String) datos[5]);
         }
         tblRequisicion.removeAll();
         tblRequisicion.setModel(consultas.ProductosRequisicionesTbl(buscID));
+       
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -322,6 +313,11 @@ public class MenuRequisiciones extends javax.swing.JFrame {
             btnBuscar.doClick();
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void tblRequisicionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRequisicionMouseClicked
+        int row=tblRequisicion.getSelectedRow();
+        System.out.println(""+row);
+    }//GEN-LAST:event_tblRequisicionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -364,7 +360,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -379,7 +374,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
     private javax.swing.JLabel lblFechaRea;
     private javax.swing.JLabel lblFolio;
     private javax.swing.JLabel lblMotivo;
-    private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblRequisitor;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JTable tblRequisicion;

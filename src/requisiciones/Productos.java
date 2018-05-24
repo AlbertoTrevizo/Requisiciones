@@ -6,7 +6,6 @@
 package requisiciones;
 
 import BD.Conexion;
-import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -554,6 +553,10 @@ public class Productos extends javax.swing.JFrame {
 
         if (consultas.Modificar(ID, nombre, descripcion, precio, unidadMedida, categoria)) {
             JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
+            txtBuscar.setText("");
+            txtNombreM.setText("");txtDescripcionM.setText("");
+            txtPrecioM.setText("");txtUnidadM.setText("");
+            cbCategoriaM.setSelectedIndex(0);
         } else {
             JOptionPane.showMessageDialog(null, "Los datos no pudieron ser guardados", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -599,6 +602,10 @@ public class Productos extends javax.swing.JFrame {
                     + "El producto se encuentra en una requisicion en proceso");
         }  else if (consultas.eliminarProductos(ID)) {
             JOptionPane.showMessageDialog(null, "Se ha eliminado el producto de manera correcta");
+            txtEliminar.setText("");
+            txtNombreE.setText("");txtDescripcionE.setText("");
+            txtPrecioE.setText("");txtUnidadE.setText("");
+            cbCategoriaE.setSelectedIndex(0);
         } else {
             JOptionPane.showMessageDialog(null, "Hubo un problema eliminando el producto");
         }
