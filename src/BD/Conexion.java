@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +28,8 @@ public class Conexion {
     public Statement st1;
     public String usuariof;
     public int usuario;
+    public String puesto;
+    private static Conexion conexion;
 
     public Conexion() {
         try {
@@ -41,13 +44,21 @@ public class Conexion {
         }
     }
 
+    public static Conexion getInstance() {
+        if (conexion == null) {
+            conexion = new Conexion();
+        }
+        return conexion;
+    }
+
     public boolean login(String usuario, String pass) {
         Boolean usu = null;
-        try (ResultSet rs = st.executeQuery("select Usuario_ID,usuario,password "
+        try (ResultSet rs = st.executeQuery("select Usuario_ID,usuario,password,puesto "
                 + "from usuarios where usuario='" + usuario + "' and password='" + pass + "'")) {
             if (rs.next()) {
                 usu = true;
                 this.usuario = Integer.parseInt(rs.getString("Usuario_ID"));
+                this.puesto = (rs.getString("puesto"));
             } else {
                 usu = false;
             }
@@ -306,16 +317,18 @@ public class Conexion {
     }
 
     public Object[] resultadosrequi(String id) {
-        String infor[] = new String[6];
+        String infor[] = new String[7];
         try (ResultSet rs = st.executeQuery("SELECT Requisicion_ID,Usuario_ID"
-                + ",Monto,FechaRequisicion,DetalleRequisicion,Estado FROM requisiciones where Requisicion_ID=" + id)) {
+                + ",Monto,FechaRequisicion,Fecha,DetalleRequisicion,Estado FROM requisiciones "
+                + "where Requisicion_ID=" + id)) {
             while (rs.next()) {
                 infor[0] = rs.getString("Requisicion_ID");
                 infor[1] = rs.getString("Usuario_ID");
                 infor[2] = rs.getString("Monto");
                 infor[3] = rs.getString("FechaRequisicion");
-                infor[4] = rs.getString("DetalleRequisicion");
-                infor[5] = rs.getString("Estado");
+                infor[4] = rs.getString("Fecha");
+                infor[5] = rs.getString("DetalleRequisicion");
+                infor[6] = rs.getString("Estado");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -373,6 +386,32 @@ public class Conexion {
         return idbusc;
     }
 
+    public String consultaPuesto() {
+        String puesto1 = null;
+        try (ResultSet rs = st.executeQuery("SELECT puesto FROM usuarios"
+                + " where Usuario_ID=" + usuario)) {
+            while (rs.next()) {
+                puesto1 = rs.getString("puesto");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return puesto1;
+    }
+
+    public int consultaUsuario() {
+        int puesto1 = 0;
+        try (ResultSet rs = st.executeQuery("SELECT Usuario_ID FROM usuarios"
+                + " where Usuario_ID=" + usuario)) {
+            while (rs.next()) {
+                puesto1 = rs.getInt("Usuario_ID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return puesto1;
+    }
+
     public DefaultTableModel requisicionesPorAprobar() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Codigo");
@@ -390,7 +429,7 @@ public class Conexion {
                 + "WHERE requisiciones.NivelActual = "
                 + "(SELECT nivel FROM usuarios WHERE Usuario_ID = " + usuario + ");")) {
             Object[] fila = new Object[7];
-            System.out.println(""+usuario);
+            System.out.println("" + usuario);
             while (rs.next()) {
                 fila[0] = rs.getString("Requisicion_ID");
                 fila[1] = rs.getString("usuario");
@@ -412,6 +451,8 @@ public class Conexion {
 
         Double monto = null;
         Integer nivel = null;
+        String FechaRequisicion = null;
+
         try {
             ResultSet rs = st.executeQuery("SELECT Monto, NivelActual FROM requisiciones where Requisicion_ID= " + id);
             if (rs.next()) {
@@ -423,29 +464,41 @@ public class Conexion {
         }
         if (monto != null && nivel != null) {
 
-            String insert = "update requisiciones set Estado =?, NivelActual=?  where Requisicion_ID=" + id;
+            String insert = "update requisiciones set Estado =?, NivelActual=?, Fecha=?  where Requisicion_ID=" + id;
             PreparedStatement ps = null;
             Integer nivelActual = null;
             String estado = "Pendiente";
 
             if (nivel > 3) {
                 nivelActual = 0;
-                estado = "aprobado";
+                estado = "Aprobada";
+                java.util.Date fecha1 = new java.util.Date();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                FechaRequisicion = sdf.format(fecha1);
             } else if (nivel > 2 && monto > 100000) {
                 nivelActual = 4;
             } else if (nivel > 2 && monto <= 100000) {
                 nivelActual = 0;
-                estado = "aprobado";
+                estado = "Aprobada";
+                java.util.Date fecha1 = new java.util.Date();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                FechaRequisicion = sdf.format(fecha1);
             } else if (nivel > 1 && monto > 50000) {
                 nivelActual = 3;
             } else if (nivel > 1 && monto <= 50000) {
                 nivelActual = 0;
-                estado = "aprobado";
+                estado = "Aprobada";
+                java.util.Date fecha1 = new java.util.Date();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                FechaRequisicion = sdf.format(fecha1);
             } else if (monto > 10000) {
                 nivelActual = 2;
             } else if (monto <= 10000) {
                 nivelActual = 0;
-                estado = "aprobado";
+                estado = "Aprobada";
+                java.util.Date fecha1 = new java.util.Date();
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                FechaRequisicion = sdf.format(fecha1);
             } else {
                 JOptionPane.showConfirmDialog(null, "Error garrafal");
             }
@@ -455,6 +508,7 @@ public class Conexion {
                 ps = cnn.prepareStatement(insert);
                 ps.setString(1, estado);
                 ps.setInt(2, nivelActual);
+                ps.setString(3, FechaRequisicion);
                 ps.executeUpdate();
                 cnn.commit();
             } catch (Exception ex) {
@@ -503,10 +557,10 @@ public class Conexion {
     }
 
     public boolean requisiciones(int Requisicion_ID, int Usuario_ID, double Monto,
-            String FechaRequisicion, String DetalleRequisicion, String Estado) {
+            String FechaRequisicion, String DetalleRequisicion, String Estado, String Nivel) {
         String insert;
         insert = "insert into requisiciones(Requisicion_ID,Usuario_ID,"
-                + "Monto,FechaRequisicion,DetalleRequisicion,Estado) values(?,?,?,?,?,?)";
+                + "Monto,FechaRequisicion,DetalleRequisicion,Estado,NivelActual) values(?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         try {
             cnn.setAutoCommit(false);
@@ -517,6 +571,7 @@ public class Conexion {
             ps.setString(4, FechaRequisicion);
             ps.setString(5, DetalleRequisicion);
             ps.setString(6, Estado);
+            ps.setString(7, Nivel);
             ps.executeUpdate();
             cnn.commit();
             return true;
@@ -834,7 +889,4 @@ public class Conexion {
         return false;
     }
 
-    public String ObtenerUsuario() {
-        return usuariof;
-    }
 }

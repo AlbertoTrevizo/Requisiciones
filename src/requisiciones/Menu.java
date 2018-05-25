@@ -14,12 +14,48 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
-    public Conexion cone = new Conexion();
-    public String nombreUsuario;
+    public Conexion cone = Conexion.getInstance();
+    public String puesto;
 
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
+        puesto = cone.consultaPuesto();
+           lblRequisiciones.setVisible(true);
+            lblBuscarRequisicion.setVisible(true);
+            lblAgregarRequisicion.setVisible(true);
+            lblMisRequisiciones.setVisible(true);
+            lblAprobaciones.setVisible(true);
+            lblProductos.setVisible(true);
+            lblCatalogo.setVisible(true);
+            lblProveedores.setVisible(true);
+            lblAgregarUsuario.setVisible(true);
+
+        if (puesto.equals("Requisitor")) {
+            lblBuscarRequisicion.setVisible(false);
+            lblAprobaciones.setVisible(false);
+            lblProductos.setVisible(false);
+            lblCatalogo.setVisible(false);
+            lblProveedores.setVisible(false);
+            lblAgregarUsuario.setVisible(false);
+        } else if (puesto.equals("Aprobador")) {
+            lblProductos.setVisible(false);
+            lblCatalogo.setVisible(false);
+            lblProveedores.setVisible(false);
+            lblAgregarUsuario.setVisible(false);
+        } else if (puesto.equals("Comprador")) {
+            lblAprobaciones.setVisible(false);
+            lblAgregarUsuario.setVisible(false);
+        } else if (puesto.equals("Administrador")) {
+            lblRequisiciones.setVisible(false);
+            lblBuscarRequisicion.setVisible(false);
+            lblAgregarRequisicion.setVisible(false);
+            lblMisRequisiciones.setVisible(false);
+            lblAprobaciones.setVisible(false);
+            lblProductos.setVisible(false);
+            lblCatalogo.setVisible(false);
+            lblProveedores.setVisible(false);
+        }
     }
 
     /**
@@ -31,12 +67,6 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRequisiciones = new javax.swing.JButton();
-        btnProductos = new javax.swing.JButton();
-        btnRealizarReque = new javax.swing.JButton();
-        btnProveedores = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
-        btnCatalogo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblMenu = new javax.swing.JLabel();
         lblSalir = new javax.swing.JLabel();
@@ -51,48 +81,6 @@ public class Menu extends javax.swing.JFrame {
         lblAgregarUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnRequisiciones.setText("Requisiciones");
-        btnRequisiciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRequisicionesActionPerformed(evt);
-            }
-        });
-
-        btnProductos.setText("Productos");
-        btnProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductosActionPerformed(evt);
-            }
-        });
-
-        btnRealizarReque.setText("Realizar Requisicion");
-        btnRealizarReque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarRequeActionPerformed(evt);
-            }
-        });
-
-        btnProveedores.setText("Proveedores");
-        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProveedoresActionPerformed(evt);
-            }
-        });
-
-        btnCerrar.setText("Cerrar Sesion");
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
-        btnCatalogo.setText("Catalogo de productos");
-        btnCatalogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCatalogoActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(36, 47, 65));
 
@@ -272,71 +260,15 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRealizarReque)
-                    .addComponent(btnProductos)
-                    .addComponent(btnRequisiciones)
-                    .addComponent(btnCatalogo)
-                    .addComponent(btnCerrar)
-                    .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRealizarReque, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRequisiciones, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCerrar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRequisicionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequisicionesActionPerformed
-        new MenuRequisiciones().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnRequisicionesActionPerformed
-
-    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-        new Productos().setVisible(true);
-    }//GEN-LAST:event_btnProductosActionPerformed
-
-    private void btnRealizarRequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarRequeActionPerformed
-        new RealizarRequisicion().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnRealizarRequeActionPerformed
-
-    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        new Proveedores().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnProveedoresActionPerformed
-
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        setVisible(false);
-        new Requisiciones().setVisible(true);
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void btnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoActionPerformed
-        new CatalogoProductos().setVisible(true);
-    }//GEN-LAST:event_btnCatalogoActionPerformed
 
     private void lblSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseClicked
         setVisible(false);
@@ -382,10 +314,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_lblProveedoresMouseClicked
 
     private void lblAgregarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarUsuarioMouseClicked
-        if(cone.obtenerUsuario() == 4){
+        if (puesto.equals("Administrador")) {
             setVisible(false);
-         //   new SignUp().setVisible(true);
-        }else{
+            new SignUp().setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(null, "Sin permisos");
         }
     }//GEN-LAST:event_lblAgregarUsuarioMouseClicked
@@ -426,12 +358,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCatalogo;
-    private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnProductos;
-    private javax.swing.JButton btnProveedores;
-    private javax.swing.JButton btnRealizarReque;
-    private javax.swing.JButton btnRequisiciones;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAgregarRequisicion;
     private javax.swing.JLabel lblAgregarUsuario;

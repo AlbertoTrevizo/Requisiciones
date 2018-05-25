@@ -17,8 +17,9 @@ import javax.swing.JPanel;
  */
 public class Requisiciones extends javax.swing.JFrame {
 
+    SignUp su = new SignUp();
     //Boolean pnlLogInActive = Boolean.TRUE;
-    public Conexion cone = new Conexion();
+    public Conexion cone = Conexion.getInstance();
     public String usuarioid;
 
     public Requisiciones() {

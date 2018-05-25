@@ -19,7 +19,9 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     int i = 0;
     DefaultTableModel modelo = new DefaultTableModel();
     public Conexion consultas = new Conexion();
+     public Conexion cone = Conexion.getInstance();
     public double total = 0;
+    public int Usuario_ID;
 
     /**
      * Creates new form RealizarRequisicion
@@ -442,42 +444,51 @@ public class RealizarRequisicion extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cantidad = null;
+        String buscar;
         String string = "";
+        buscar = txtCodigo.getText();
 
-        int comp;
-        do {
-            cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
-            if (cantidad.matches("[0-9]*")) {
-                string = cantidad;
-            } else {
-            }
-        } while (!cantidad.matches("[0-9]*"));
-
-        if (cantidad == null) {
+        if (buscar.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID para agregar un producto");
         } else {
-            comp = Integer.parseInt(cantidad);
-            if (comp <= 0) {
-                JOptionPane.showMessageDialog(null, "Cantidad invalida");
-            } else {
-                String ID = txtCodigo.getText();
-                String buscID;
-                buscID = consultas.consulta(ID);
-                if (buscID == null) {
-                    JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+            int comp;
+            do {
+                cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+                if (cantidad.matches("[0-9]*")) {
+                    string = cantidad;
                 } else {
-                    Object datos[] = consultas.resultados(ID);
-                    txtNombre.setText((String) datos[1]);
-                    txtDescripcion.setText((String) datos[2]);
-                    txtPrecio.setText((String) datos[3]);
-                    txtUnidad.setText((String) datos[4]);
-                    txtProveedor.setText((String) datos[6]);
                 }
-                txtUnidad.setText(cantidad);
+            } while (!cantidad.matches("[0-9]*"));
+
+            if (cantidad == null) {
+            } else {
+                comp = Integer.parseInt(cantidad);
+                if (comp <= 0) {
+                    JOptionPane.showMessageDialog(null, "Cantidad invalida");
+                } else {
+                    String ID = txtCodigo.getText();
+                    String buscID;
+                    buscID = consultas.consulta(ID);
+                    if (buscID == null) {
+                        JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+                    } else {
+                        Object datos[] = consultas.resultados(ID);
+                        txtNombre.setText((String) datos[1]);
+                        txtDescripcion.setText((String) datos[2]);
+                        txtPrecio.setText((String) datos[3]);
+                        txtUnidad.setText((String) datos[4]);
+                        txtProveedor.setText((String) datos[6]);
+                    }
+                    txtUnidad.setText(cantidad);
+                }
             }
         }
+
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+
         char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
             btnBuscar.doClick();
@@ -508,7 +519,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                 txtUnidad.setText(cantidad);
             }
         }
-         
+
     }//GEN-LAST:event_txtUnidadMouseClicked
 
     private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
@@ -595,10 +606,10 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     private void lblRealizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRealizarMouseClicked
         int Requisicion_ID, Usuario_ID, Proveedores_ID;
         double Monto;
-        String FechaRequisicion, DetalleRequisicion, Estado;
+        String FechaRequisicion, DetalleRequisicion, Estado, Nivel = "1";
         DetalleRequisicion = JOptionPane.showInputDialog(null, "Ingrese una nota a la requisicion");
         Requisicion_ID = consultas.requiID() + 1;
-        Usuario_ID = 0;
+        Usuario_ID = cone.consultaUsuario();
         Proveedores_ID = 0;
         Monto = total;
         java.util.Date fecha1 = new java.util.Date();
@@ -607,7 +618,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         Estado = "Pendiente";
 
         if (consultas.requisiciones(Requisicion_ID, Usuario_ID,
-                Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {
+                Monto, FechaRequisicion, DetalleRequisicion, Estado, Nivel) == true) {
             JOptionPane.showMessageDialog(null, "La requisicion de realizo de manera exitosa");
         } else {
             JOptionPane.showMessageDialog(null, "La requisicion no se realizo de manera exitosa");

@@ -23,8 +23,6 @@ public class MenuRequisiciones extends javax.swing.JFrame {
     public MenuRequisiciones() {
         initComponents();
         setLocationRelativeTo(null);
-        java.util.Date fecha = new Date();
-        lblFechaAprob.setText("" + fecha);
         btnBuscar.setVisible(false);
     }
 
@@ -87,7 +85,7 @@ public class MenuRequisiciones extends javax.swing.JFrame {
         jLabel8.setText("Fecha de realizacion:");
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Fecha de aprobacion:");
+        jLabel9.setText("Fecha de aprobacion/rechazo:");
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Estatus:");
@@ -346,22 +344,30 @@ public class MenuRequisiciones extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String ID = txtBuscar.getText();
+        String buscar = txtBuscar.getText();
         String buscID;
 
-        buscID = consultas.consultarequi(ID);
-        if (buscID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos la requisicion no pudo ser encontrada.");
+        if (buscar.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID para iniciar la busqueda");
         } else {
-            Object datos[] = consultas.resultadosrequi(buscID);
-            lblFolio.setText(buscID);
-            lblRequisitor.setText((String) datos[1]);
-            lblTotal.setText((String) datos[2]);
-            lblFechaRea.setText((String) datos[3]);
-            lblMotivo.setText((String) datos[4]);
-            lblEstatus.setText((String) datos[5]);
+            buscID = consultas.consultarequi(ID);
+            if (buscID == null) {
+                JOptionPane.showMessageDialog(null, "Lo sentimos la requisicion no pudo ser encontrada.");
+            } else {
+                Object datos[] = consultas.resultadosrequi(buscID);
+                lblFolio.setText(buscID);
+                lblRequisitor.setText((String) datos[1]);
+                lblTotal.setText((String) datos[2]);
+                lblFechaRea.setText((String) datos[3]);
+                lblFechaAprob.setText((String) datos[4]);
+                lblMotivo.setText((String) datos[5]);
+                lblEstatus.setText((String) datos[6]);
+            }
+            tblRequisicion1.removeAll();
+            tblRequisicion1.setModel(consultas.ProductosRequisicionesTbl(buscID));
+
         }
-        tblRequisicion1.removeAll();
-        tblRequisicion1.setModel(consultas.ProductosRequisicionesTbl(buscID));
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -378,8 +384,9 @@ public class MenuRequisiciones extends javax.swing.JFrame {
             lblRequisitor.setText((String) datos[1]);
             lblTotal.setText((String) datos[2]);
             lblFechaRea.setText((String) datos[3]);
-            lblMotivo.setText((String) datos[4]);
-            lblEstatus.setText((String) datos[5]);
+            lblFechaAprob.setText((String) datos[4]);
+            lblMotivo.setText((String) datos[5]);
+            lblEstatus.setText((String) datos[6]);
         }
         tblRequisicion1.removeAll();
         tblRequisicion1.setModel(consultas.ProductosRequisicionesTbl(buscID));
@@ -395,7 +402,7 @@ public class MenuRequisiciones extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMenu1MouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-       char Tecla = evt.getKeyChar();
+        char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
             btnBuscar.doClick();
         }
@@ -442,62 +449,33 @@ public class MenuRequisiciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JPanel btnBuscar1;
     private javax.swing.JPanel btnBuscar2;
-    private javax.swing.JPanel btnCatalogo;
     private javax.swing.JPanel btnCatalogo1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator16;
-    private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblBuscar1;
-    private javax.swing.JLabel lblCatalogo;
     private javax.swing.JLabel lblCatalogo1;
     private javax.swing.JLabel lblDepartamento;
-    private javax.swing.JLabel lblDepartamento1;
     private javax.swing.JLabel lblDepartamento2;
     private javax.swing.JLabel lblEstatus;
-    private javax.swing.JLabel lblEstatus1;
     private javax.swing.JLabel lblFechaAprob;
-    private javax.swing.JLabel lblFechaAprob1;
     private javax.swing.JLabel lblFechaRea;
-    private javax.swing.JLabel lblFechaRea1;
     private javax.swing.JLabel lblFolio;
-    private javax.swing.JLabel lblFolio1;
-    private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblMenu1;
     private javax.swing.JLabel lblMotivo;
-    private javax.swing.JLabel lblMotivo1;
-    private javax.swing.JLabel lblProveedor;
     private javax.swing.JLabel lblRequisitor;
-    private javax.swing.JLabel lblRequisitor1;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JLabel lblTotal1;
-    private javax.swing.JTable tblRequisicion;
     private javax.swing.JTable tblRequisicion1;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtBuscar1;
     // End of variables declaration//GEN-END:variables
 }

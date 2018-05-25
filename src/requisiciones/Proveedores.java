@@ -906,49 +906,56 @@ public class Proveedores extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String ID = txtBuscarM.getText();
         String consultID, comp;
-        consultID = consultas.consultPro(ID);
-        if (consultID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
+        if (ID.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID para iniciar la busqueda");
         } else {
-            Object datos[] = consultas.resultadPro(ID);
-            txtIDProM.setText((String) datos[0]);
-            txtProveedorM.setText((String) datos[1]);
-            txtNombreM.setText((String) datos[2]);
-            txtDireccionM.setText((String) datos[3]);
-            txtTelefonoM.setText((String) datos[4]);
-            txtFormaPagoM.setText((String) datos[5]);
-            txtRFCM.setText((String) datos[6]);
-            comp = ((String) datos[7]);
-            if (comp.equals("Activo")) {
-                cbEstadoM.setSelectedIndex(0);
+            consultID = consultas.consultPro(ID);
+            if (consultID == null) {
+                JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
             } else {
-                cbEstadoM.setSelectedIndex(1);
+                Object datos[] = consultas.resultadPro(ID);
+                txtIDProM.setText((String) datos[0]);
+                txtProveedorM.setText((String) datos[1]);
+                txtNombreM.setText((String) datos[2]);
+                txtDireccionM.setText((String) datos[3]);
+                txtTelefonoM.setText((String) datos[4]);
+                txtFormaPagoM.setText((String) datos[5]);
+                txtRFCM.setText((String) datos[6]);
+                comp = ((String) datos[7]);
+                if (comp.equals("Activo")) {
+                    cbEstadoM.setSelectedIndex(0);
+                } else {
+                    cbEstadoM.setSelectedIndex(1);
+                }
             }
         }
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEActionPerformed
         String ID = txtBuscarE.getText();
         String consultID, comp;
-        consultID = consultas.consultPro(ID);
-        if (consultID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
+        if (ID.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID para iniciar la busqueda");
         } else {
-            Object datos[] = consultas.resultadPro(ID);
-            txtIDProE.setText((String) datos[0]);
-            txtProveedorE.setText((String) datos[1]);
-            txtNombreE.setText((String) datos[2]);
-            txtDireccionE.setText((String) datos[3]);
-            txtTelefonoE.setText((String) datos[4]);
-            txtFormaPagoE.setText((String) datos[5]);
-            txtRFCE.setText((String) datos[6]);
-            comp = ((String) datos[7]);
-            est = comp;
-            if (comp.equals("Activo")) {
-                cbEstadoE.setSelectedIndex(0);
+            consultID = consultas.consultPro(ID);
+            if (consultID == null) {
+                JOptionPane.showMessageDialog(null, "Lo sentimos el proveedor no pudo ser encontrado.");
             } else {
-                cbEstadoE.setSelectedIndex(1);
+                Object datos[] = consultas.resultadPro(ID);
+                txtIDProE.setText((String) datos[0]);
+                txtProveedorE.setText((String) datos[1]);
+                txtNombreE.setText((String) datos[2]);
+                txtDireccionE.setText((String) datos[3]);
+                txtTelefonoE.setText((String) datos[4]);
+                txtFormaPagoE.setText((String) datos[5]);
+                txtRFCE.setText((String) datos[6]);
+                comp = ((String) datos[7]);
+                est = comp;
+                if (comp.equals("Activo")) {
+                    cbEstadoE.setSelectedIndex(0);
+                } else {
+                    cbEstadoE.setSelectedIndex(1);
+                }
             }
         }
     }//GEN-LAST:event_btnBuscarEActionPerformed

@@ -765,32 +765,38 @@ public class Productos extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String ID = txtBuscar1.getText();
+        String buscar = txtBuscar1.getText();
         String buscID, comp;
 
-        buscID = consultas.consulta(ID);
-        if (buscID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+        if (buscar.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID para iniciar la busqueda");
         } else {
-            Object datos[] = consultas.resultados(ID);
+            buscID = consultas.consulta(ID);
+            if (buscID == null) {
+                JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+            } else {
+                Object datos[] = consultas.resultados(ID);
 
-            txtNombreM1.setText((String) datos[1]);
-            txtDescripcionM1.setText((String) datos[2]);
-            txtPrecioM1.setText((String) datos[3]);
-            txtUnidadM1.setText((String) datos[4]);
-            comp = ((String) datos[5]);
+                txtNombreM1.setText((String) datos[1]);
+                txtDescripcionM1.setText((String) datos[2]);
+                txtPrecioM1.setText((String) datos[3]);
+                txtUnidadM1.setText((String) datos[4]);
+                comp = ((String) datos[5]);
 
-            if (comp.equals("Papeleria")) {
-                cbCategoriaM1.setSelectedIndex(0);
-            } else if (comp.equals("Insumos")) {
-                cbCategoriaM1.setSelectedIndex(1);
-            } else if (comp.equals("Mobiliario")) {
-                cbCategoriaM1.setSelectedIndex(2);
-            } else if (comp.equals("Equipo tecnico")) {
-                cbCategoriaM1.setSelectedIndex(3);
-            } else if (comp.equals("Herramientas")) {
-                cbCategoriaM1.setSelectedIndex(4);
+                if (comp.equals("Papeleria")) {
+                    cbCategoriaM1.setSelectedIndex(0);
+                } else if (comp.equals("Insumos")) {
+                    cbCategoriaM1.setSelectedIndex(1);
+                } else if (comp.equals("Mobiliario")) {
+                    cbCategoriaM1.setSelectedIndex(2);
+                } else if (comp.equals("Equipo tecnico")) {
+                    cbCategoriaM1.setSelectedIndex(3);
+                } else if (comp.equals("Herramientas")) {
+                    cbCategoriaM1.setSelectedIndex(4);
+                }
             }
         }
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -798,32 +804,34 @@ public class Productos extends javax.swing.JFrame {
         String ID = txtEliminar1.getText();
         String buscID, comp;
 
-        buscID = consultas.consulta(ID);
-        if (buscID == null) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+        if (ID.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un ID para iniciar la busqueda");
         } else {
-            Object datos[] = consultas.resultados(ID);
+            buscID = consultas.consulta(ID);
+            if (buscID == null) {
+                JOptionPane.showMessageDialog(null, "Lo sentimos el producto no pudo ser encontrado.");
+            } else {
+                Object datos[] = consultas.resultados(ID);
 
-            txtNombreE1.setText((String) datos[1]);
-            txtDescripcionE1.setText((String) datos[2]);
-            txtPrecioE1.setText((String) datos[3]);
-            txtUnidadE1.setText((String) datos[4]);
-            comp = ((String) datos[5]);
+                txtNombreE1.setText((String) datos[1]);
+                txtDescripcionE1.setText((String) datos[2]);
+                txtPrecioE1.setText((String) datos[3]);
+                txtUnidadE1.setText((String) datos[4]);
+                comp = ((String) datos[5]);
 
-            if (comp.equals("Papeleria")) {
-                cbCategoriaE1.setSelectedIndex(0);
-            } else if (comp.equals("Insumos")) {
-                cbCategoriaE1.setSelectedIndex(1);
-            } else if (comp.equals("Mobiliario")) {
-                cbCategoriaE1.setSelectedIndex(2);
-            } else if (comp.equals("Equipo tecnico")) {
-                cbCategoriaE1.setSelectedIndex(3);
-            } else if (comp.equals("Herramientas")) {
-                cbCategoriaE1.setSelectedIndex(4);
+                if (comp.equals("Papeleria")) {
+                    cbCategoriaE1.setSelectedIndex(0);
+                } else if (comp.equals("Insumos")) {
+                    cbCategoriaE1.setSelectedIndex(1);
+                } else if (comp.equals("Mobiliario")) {
+                    cbCategoriaE1.setSelectedIndex(2);
+                } else if (comp.equals("Equipo tecnico")) {
+                    cbCategoriaE1.setSelectedIndex(3);
+                } else if (comp.equals("Herramientas")) {
+                    cbCategoriaE1.setSelectedIndex(4);
+                }
             }
         }
-
-
     }//GEN-LAST:event_btnBuscarEActionPerformed
 
     private void lblAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgregarMouseClicked
@@ -984,7 +992,7 @@ public class Productos extends javax.swing.JFrame {
             evt.consume();
         }
         char c = evt.getKeyChar();
-       if ((c < 48 || c > 57)) {
+        if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -1080,7 +1088,7 @@ public class Productos extends javax.swing.JFrame {
             evt.consume();
         }
         char c = evt.getKeyChar();
-       if ((c < 48 || c > 57)) {
+        if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
