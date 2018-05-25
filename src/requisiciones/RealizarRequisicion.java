@@ -34,7 +34,8 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         modelo.addColumn("Cantidad");
         modelo.addColumn("Costo Unitario");
         modelo.addColumn("Costo Total");
-        btnBuscar.setVisible(false);btnAgregar.setVisible(false);
+        btnBuscar.setVisible(false);
+        btnAgregar.setVisible(false);
     }
 
     /**
@@ -469,7 +470,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                     txtDescripcion.setText((String) datos[2]);
                     txtPrecio.setText((String) datos[3]);
                     txtUnidad.setText((String) datos[4]);
-                    txtProveedor.setText((String)datos[6]);
+                    txtProveedor.setText((String) datos[6]);
                 }
                 txtUnidad.setText(cantidad);
             }
@@ -477,15 +478,27 @@ public class RealizarRequisicion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
-        char Tecla=evt.getKeyChar();
+        char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
             btnBuscar.doClick();
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void txtUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUnidadMouseClicked
-        String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        String cantidad = null;
+        String string = "";
+
         int comp;
+        do {
+            cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+            if (cantidad.matches("[0-9]*")) {
+                string = cantidad;
+            } else {
+            }
+        } while (!cantidad.matches("[0-9]*"));
+
+        // String cantidad = JOptionPane.showInputDialog(null, "Ingrese la cantidad del producto a utilizar");
+        // int comp;
         if (cantidad == null) {
         } else {
             comp = Integer.parseInt(cantidad);
@@ -495,6 +508,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                 txtUnidad.setText(cantidad);
             }
         }
+         
     }//GEN-LAST:event_txtUnidadMouseClicked
 
     private void lblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMenuMouseClicked
@@ -532,7 +546,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
                     txtDescripcion.setText((String) datos[2]);
                     txtPrecio.setText((String) datos[3]);
                     txtUnidad.setText((String) datos[4]);
-                    txtProveedor.setText((String)datos[6]);
+                    txtProveedor.setText((String) datos[6]);
                 }
                 txtUnidad.setText(cantidad);
             }
@@ -593,8 +607,8 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         Estado = "Pendiente";
 
         if (consultas.requisiciones(Requisicion_ID, Usuario_ID,
-            Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {
-        JOptionPane.showMessageDialog(null, "La requisicion de realizo de manera exitosa");
+                Monto, FechaRequisicion, DetalleRequisicion, Estado) == true) {
+            JOptionPane.showMessageDialog(null, "La requisicion de realizo de manera exitosa");
         } else {
             JOptionPane.showMessageDialog(null, "La requisicion no se realizo de manera exitosa");
         }
@@ -605,18 +619,18 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         for (int j = 0; j < tblRequisicion.getRowCount(); j++) {
             item = Integer.parseInt("" + tblRequisicion.getValueAt(j, 0));
             codigo = Integer.parseInt("" + tblRequisicion.getValueAt(j, 1));
-            Proveedores_ID = Integer.parseInt(""+tblRequisicion.getValueAt(j,3));
+            Proveedores_ID = Integer.parseInt("" + tblRequisicion.getValueAt(j, 3));
             cantidad = Integer.parseInt("" + tblRequisicion.getValueAt(j, 4));
             costototal = Float.parseFloat("" + tblRequisicion.getValueAt(j, 6));
 
             if (consultas.productosrequisiciones(Requisicion_ID, Usuario_ID,
-                codigo, cantidad, costototal,Proveedores_ID,Estado)) {
-            JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " fue agregado "
-                + "correctamente a la requisicion");
-        } else {
-            JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " no fue agregado "
-                + "correctamente a la requisicion");
-        }
+                    codigo, cantidad, costototal, Proveedores_ID, Estado)) {
+                JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " fue agregado "
+                        + "correctamente a la requisicion");
+            } else {
+                JOptionPane.showMessageDialog(null, "El articulo de la lista " + item + " no fue agregado "
+                        + "correctamente a la requisicion");
+            }
         }
         DefaultTableModel modelo1 = new DefaultTableModel();
         modelo1.addColumn("Item");
@@ -627,7 +641,7 @@ public class RealizarRequisicion extends javax.swing.JFrame {
         modelo1.addColumn("Costo Unitario");
         modelo1.addColumn("Costo Total");
         tblRequisicion.setModel(modelo1);
-        total=0;
+        total = 0;
         lblTotal.setText(".");
     }//GEN-LAST:event_lblRealizarMouseClicked
 

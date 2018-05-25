@@ -24,7 +24,8 @@ public class Proveedores extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         ID = consultas.consultaprove() + 1;
         txtID.setText("" + ID);
-        btnBuscar.setVisible(false);btnBuscarE.setVisible(false);
+        btnBuscar.setVisible(false);
+        btnBuscarE.setVisible(false);
     }
 
     /**
@@ -430,6 +431,11 @@ public class Proveedores extends javax.swing.JFrame {
         jLabel34.setText("Estado:");
 
         cbEstadoM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cbEstadoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstadoMActionPerformed(evt);
+            }
+        });
 
         btnModificar.setBackground(new java.awt.Color(97, 212, 195));
         btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -617,6 +623,7 @@ public class Proveedores extends javax.swing.JFrame {
         txtIDProE.setBackground(new java.awt.Color(36, 47, 65));
         txtIDProE.setBorder(null);
 
+        txtProveedorE.setEditable(false);
         txtProveedorE.setBackground(new java.awt.Color(36, 47, 65));
         txtProveedorE.setForeground(new java.awt.Color(255, 255, 255));
         txtProveedorE.setBorder(null);
@@ -625,12 +632,14 @@ public class Proveedores extends javax.swing.JFrame {
         jLabel36.setForeground(java.awt.Color.white);
         jLabel36.setText("Proveedor:");
 
+        txtNombreE.setEditable(false);
         txtNombreE.setBackground(new java.awt.Color(36, 47, 65));
         txtNombreE.setBorder(null);
 
         jLabel37.setForeground(java.awt.Color.white);
         jLabel37.setText("Nombre:");
 
+        txtDireccionE.setEditable(false);
         txtDireccionE.setBackground(new java.awt.Color(36, 47, 65));
         txtDireccionE.setBorder(null);
 
@@ -640,15 +649,18 @@ public class Proveedores extends javax.swing.JFrame {
         jLabel39.setForeground(java.awt.Color.white);
         jLabel39.setText("Telefono:");
 
+        txtTelefonoE.setEditable(false);
         txtTelefonoE.setBackground(new java.awt.Color(36, 47, 65));
         txtTelefonoE.setBorder(null);
 
+        txtFormaPagoE.setEditable(false);
         txtFormaPagoE.setBackground(new java.awt.Color(36, 47, 65));
         txtFormaPagoE.setBorder(null);
 
         jLabel40.setForeground(java.awt.Color.white);
         jLabel40.setText("Forma de Pago:");
 
+        txtRFCE.setEditable(false);
         txtRFCE.setBackground(new java.awt.Color(36, 47, 65));
         txtRFCE.setBorder(null);
 
@@ -947,7 +959,7 @@ public class Proveedores extends javax.swing.JFrame {
             getToolkit().beep();
         }
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -958,6 +970,11 @@ public class Proveedores extends javax.swing.JFrame {
             evt.consume();
             getToolkit().beep();
         }
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtDireccionKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
@@ -966,7 +983,7 @@ public class Proveedores extends javax.swing.JFrame {
             getToolkit().beep();
         }
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+        if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -978,7 +995,7 @@ public class Proveedores extends javax.swing.JFrame {
             getToolkit().beep();
         }
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -989,12 +1006,22 @@ public class Proveedores extends javax.swing.JFrame {
             evt.consume();
             getToolkit().beep();
         }
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtRFCKeyTyped
 
     private void txtProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedorKeyTyped
         if (txtProveedor.getText().length() == 20) {
             evt.consume();
             getToolkit().beep();
+        }
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
         }
     }//GEN-LAST:event_txtProveedorKeyTyped
 
@@ -1025,12 +1052,21 @@ public class Proveedores extends javax.swing.JFrame {
         if (Tecla == KeyEvent.VK_ENTER) {
             btnBuscar.doClick();
         }
+        if ((Tecla < 48 || Tecla > 57)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBuscarMKeyTyped
 
     private void txtProveedorMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProveedorMKeyTyped
         if (txtProveedorM.getText().length() == 20) {
             evt.consume();
             getToolkit().beep();
+        }
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
         }
     }//GEN-LAST:event_txtProveedorMKeyTyped
 
@@ -1039,10 +1075,20 @@ public class Proveedores extends javax.swing.JFrame {
             evt.consume();
             getToolkit().beep();
         }
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNombreMKeyTyped
 
     private void txtDireccionMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionMKeyTyped
         if (txtDireccionM.getText().length() == 25) {
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtDireccionMKeyTyped
@@ -1053,7 +1099,7 @@ public class Proveedores extends javax.swing.JFrame {
             getToolkit().beep();
         }
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+        if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -1065,7 +1111,7 @@ public class Proveedores extends javax.swing.JFrame {
             getToolkit().beep();
         }
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -1137,6 +1183,10 @@ public class Proveedores extends javax.swing.JFrame {
         if (Tecla == KeyEvent.VK_ENTER) {
             btnBuscarE.doClick();
         }
+        if ((Tecla < 48 || Tecla > 57)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBuscarEKeyTyped
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
@@ -1144,13 +1194,17 @@ public class Proveedores extends javax.swing.JFrame {
 
         if (consultas.RequiPend("" + ID) > 0) {
             JOptionPane.showMessageDialog(null, "Lo sentimos, el proveedor no puede ser eliminado\n"
-                + "El proveedor se encuentra en una requisicion en proceso");
+                    + "El proveedor se encuentra en una requisicion en proceso");
         } else if (consultas.eliminarPro(ID) && "Inactivo".equals(est)) {
             JOptionPane.showMessageDialog(null, "El proveedor pudo ser eliminado");
-            txtIDProE.setText("");txtProveedorE.setText("");
-            txtNombreE.setText("");txtDireccionE.setText("");
-            txtTelefonoE.setText("");txtFormaPagoE.setText("");
-            txtRFCE.setText("");cbEstadoE.setSelectedIndex(0);
+            txtIDProE.setText("");
+            txtProveedorE.setText("");
+            txtNombreE.setText("");
+            txtDireccionE.setText("");
+            txtTelefonoE.setText("");
+            txtFormaPagoE.setText("");
+            txtRFCE.setText("");
+            cbEstadoE.setSelectedIndex(0);
             txtBuscarE.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "El proveedor no pudo ser eliminado");
@@ -1200,6 +1254,10 @@ public class Proveedores extends javax.swing.JFrame {
         new CatalogoProveedores().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblCatalogoRMouseClicked
+
+    private void cbEstadoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEstadoMActionPerformed
 
     /**
      * @param args the command line arguments

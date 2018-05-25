@@ -395,9 +395,13 @@ public class MenuRequisiciones extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMenu1MouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-        char Tecla = evt.getKeyChar();
+       char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
-             btnBuscar.doClick();
+            btnBuscar.doClick();
+        }
+        if ((Tecla < 48 || Tecla > 57)) {
+            getToolkit().beep();
+            evt.consume();
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
 

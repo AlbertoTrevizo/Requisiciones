@@ -166,6 +166,11 @@ public class Requisiciones extends javax.swing.JFrame {
                 txtEmailActionPerformed(evt);
             }
         });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailKeyTyped(evt);
+            }
+        });
 
         lblEmail.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(204, 204, 204));
@@ -262,6 +267,11 @@ public class Requisiciones extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
         char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
             String usuario = txtEmail.getText();
@@ -281,6 +291,14 @@ public class Requisiciones extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEmailKeyTyped
 
     /**
      * @param args the command line arguments

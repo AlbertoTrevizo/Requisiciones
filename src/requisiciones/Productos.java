@@ -855,7 +855,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregar1MouseClicked
 
     private void lblBuscarMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMMouseClicked
-       String ID = txtBuscar1.getText();
+        String ID = txtBuscar1.getText();
         String buscID, comp;
 
         buscID = consultas.consulta(ID);
@@ -951,7 +951,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarE1MouseClicked
 
     private void lblEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEliminarMouseClicked
-       int ID = Integer.parseInt(txtEliminar1.getText());
+        int ID = Integer.parseInt(txtEliminar1.getText());
 
         if ((consultas.ProPend("" + ID) > 0)) {
             JOptionPane.showMessageDialog(null, "Lo sentimos, el producto no puede ser eliminado\n"
@@ -979,12 +979,12 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMenu4MouseClicked
 
     private void txtUnidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidad1KeyTyped
-        if (txtUnidad1.getText().length() == 10) {
+        if (txtUnidadM1.getText().length() == 10) {
             getToolkit().beep();
             evt.consume();
         }
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+       if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -996,7 +996,7 @@ public class Productos extends javax.swing.JFrame {
             evt.consume();
         }
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+        if ((c < 47 || c > 58)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -1007,10 +1007,20 @@ public class Productos extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
         }
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtDescripcion1KeyTyped
 
     private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
         if (txtNombre1.getText().length() == 25) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -1022,50 +1032,68 @@ public class Productos extends javax.swing.JFrame {
         if (Tecla == KeyEvent.VK_ENTER) {
             btnBuscar.doClick();
         }
+        if ((Tecla < 48 || Tecla > 57)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBuscar1KeyTyped
 
     private void txtNombreM1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreM1KeyTyped
-              if (txtNombreM1.getText().length() == 25) {
+        if (txtNombreM1.getText().length() == 25) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreM1KeyTyped
 
     private void txtDescripcionM1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionM1KeyTyped
-            if (txtDescripcionM1.getText().length() == 60) {
+        if (txtDescripcionM1.getText().length() == 60) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtDescripcionM1KeyTyped
 
     private void txtPrecioM1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioM1KeyTyped
-                if (txtPrecioM1.getText().length() == 10) {
+        if (txtPrecioM1.getText().length() == 10) {
             getToolkit().beep();
             evt.consume();
         }
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+        if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtPrecioM1KeyTyped
 
     private void txtUnidadM1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidadM1KeyTyped
-                if (txtUnidadM1.getText().length() == 10) {
+        if (txtUnidadM1.getText().length() == 10) {
             getToolkit().beep();
             evt.consume();
         }
         char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
+       if ((c < 48 || c > 57)) {
             getToolkit().beep();
             evt.consume();
         }
     }//GEN-LAST:event_txtUnidadM1KeyTyped
 
     private void txtEliminar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEliminar1KeyTyped
-              char Tecla = evt.getKeyChar();
+        char Tecla = evt.getKeyChar();
         if (Tecla == KeyEvent.VK_ENTER) {
-            btnBuscarE.doClick();
+            btnBuscar.doClick();
+        }
+        if ((Tecla < 48 || Tecla > 57)) {
+            getToolkit().beep();
+            evt.consume();
         }
     }//GEN-LAST:event_txtEliminar1KeyTyped
 

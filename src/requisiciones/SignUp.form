@@ -60,21 +60,26 @@
                           <Component id="lblHome" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblConfirmPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSeparator4" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="txtPassword" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtConfirmPassword" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="jSeparator6" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="jSeparator5" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtName" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="jSeparator8" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="lblPuesto" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtPuesto" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="lblNivel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNivel" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              <Component id="jSeparator7" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                              <Component id="cbPuesto" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lblConfirmPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jSeparator4" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="txtPassword" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtConfirmPassword" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="jSeparator6" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="jSeparator5" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtName" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="jSeparator8" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="lblPuesto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblNivel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jSeparator7" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="cbNivel" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -119,14 +124,14 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblPuesto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPuesto" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cbPuesto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="jSeparator6" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblNivel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtNivel" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="cbNivel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   <Component id="jSeparator7" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace pref="42" max="32767" attributes="0"/>
                   <Component id="chbAgree" min="-2" max="-2" attributes="0"/>
@@ -205,6 +210,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtNameMouseClicked"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNameKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPassword">
@@ -233,28 +239,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPasswordFocusGained"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtPuesto">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="41" green="2f" red="24" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Century Gothic" size="12" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPuestoFocusGained"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPasswordKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblName">
@@ -329,6 +314,7 @@
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtConfirmPasswordFocusGained"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtConfirmPasswordKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator8">
@@ -347,25 +333,6 @@
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="NIVEL"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNivel">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="41" green="2f" red="24" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Century Gothic" size="12" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator7">
@@ -391,6 +358,39 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHomeMouseClicked"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbPuesto">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Requisitor"/>
+                <StringItem index="1" value="Aprobador"/>
+                <StringItem index="2" value="Comprador"/>
+                <StringItem index="3" value="Administrador"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPuestoActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbNivel">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="1"/>
+                <StringItem index="1" value="2"/>
+                <StringItem index="2" value="3"/>
+                <StringItem index="3" value="4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

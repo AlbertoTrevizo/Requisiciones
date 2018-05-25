@@ -17,6 +17,7 @@ public class SignUp extends javax.swing.JFrame {
     public Conexion consultas = new Conexion();
     String nombre;
     String contra;
+    String confir;
     String puesto;
     Integer nivel;
 
@@ -28,16 +29,28 @@ public class SignUp extends javax.swing.JFrame {
     private void registrar() {
         nombre = txtName.getText();
         contra = txtPassword.getText();
-        puesto = txtPuesto.getText();
-        nivel = Integer.parseInt(txtNivel.getText());
+        confir = txtConfirmPassword.getText();
+        puesto = cbPuesto.getSelectedItem().toString();
+        nivel = Integer.parseInt(cbNivel.getSelectedItem().toString());
 
-        if (consultas.agregarUsuario(nombre, contra, puesto, nivel)) {
-            JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
-            setVisible(false);
-            new Menu().setVisible(true);
+        if (contra.equals(confir)) {
+            if (chbAgree.isSelected() == true) {
+                if (consultas.agregarUsuario(nombre, contra, puesto, nivel)) {
+                    JOptionPane.showMessageDialog(null, "Los datos fueron guardados exitosamente", "Aceptar", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    new Menu().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Los datos no pudieron ser guardados", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Acepte los termino y condiciones para continuar");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(null, "Los datos no pudieron ser guardados", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden, vuelve a intentarlo");
+            txtConfirmPassword.requestFocus();
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -53,7 +66,6 @@ public class SignUp extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        txtPuesto = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
         pnlBtnSignUp = new javax.swing.JPanel();
         lblSignUp = new javax.swing.JLabel();
@@ -61,9 +73,10 @@ public class SignUp extends javax.swing.JFrame {
         txtConfirmPassword = new javax.swing.JPasswordField();
         jSeparator8 = new javax.swing.JSeparator();
         lblNivel = new javax.swing.JLabel();
-        txtNivel = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         lblHome = new javax.swing.JLabel();
+        cbPuesto = new javax.swing.JComboBox<>();
+        cbNivel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +108,11 @@ public class SignUp extends javax.swing.JFrame {
                 txtNameMouseClicked(evt);
             }
         });
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
+            }
+        });
 
         lblPassword.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(204, 204, 204));
@@ -109,15 +127,9 @@ public class SignUp extends javax.swing.JFrame {
                 txtPasswordFocusGained(evt);
             }
         });
-
-        txtPuesto.setBackground(new java.awt.Color(36, 47, 65));
-        txtPuesto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtPuesto.setForeground(new java.awt.Color(255, 255, 255));
-        txtPuesto.setBorder(null);
-        txtPuesto.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        txtPuesto.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPuestoFocusGained(evt);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
 
@@ -157,18 +169,17 @@ public class SignUp extends javax.swing.JFrame {
                 txtConfirmPasswordFocusGained(evt);
             }
         });
+        txtConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtConfirmPasswordKeyTyped(evt);
+            }
+        });
 
         jSeparator8.setForeground(new java.awt.Color(255, 255, 255));
 
         lblNivel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblNivel.setForeground(new java.awt.Color(204, 204, 204));
         lblNivel.setText("NIVEL");
-
-        txtNivel.setBackground(new java.awt.Color(36, 47, 65));
-        txtNivel.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNivel.setForeground(new java.awt.Color(255, 255, 255));
-        txtNivel.setBorder(null);
-        txtNivel.setDisabledTextColor(new java.awt.Color(204, 204, 204));
 
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -181,6 +192,15 @@ public class SignUp extends javax.swing.JFrame {
                 lblHomeMouseClicked(evt);
             }
         });
+
+        cbPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Requisitor", "Aprobador", "Comprador", "Administrador" }));
+        cbPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPuestoActionPerformed(evt);
+            }
+        });
+
+        cbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,21 +216,24 @@ public class SignUp extends javax.swing.JFrame {
                         .addComponent(lblHome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblConfirmPassword)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPassword)
-                            .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPuesto)
-                            .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNivel)
-                            .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbPuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblConfirmPassword)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(lblPassword)
+                                    .addComponent(txtConfirmPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(lblName)
+                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(jSeparator8, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(lblPuesto)
+                                    .addComponent(lblNivel)
+                                    .addComponent(jSeparator7, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(cbNivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(153, 153, 153)
@@ -246,14 +269,14 @@ public class SignUp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblPuesto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblNivel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(chbAgree)
@@ -288,10 +311,6 @@ public class SignUp extends javax.swing.JFrame {
         txtPassword.setText("");
     }//GEN-LAST:event_txtPasswordFocusGained
 
-    private void txtPuestoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPuestoFocusGained
-        txtPuesto.setText("");
-    }//GEN-LAST:event_txtPuestoFocusGained
-
     private void lblSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpMouseClicked
         registrar();
     }//GEN-LAST:event_lblSignUpMouseClicked
@@ -308,6 +327,34 @@ public class SignUp extends javax.swing.JFrame {
         new Menu().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lblHomeMouseClicked
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNameKeyTyped
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void txtConfirmPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmPasswordKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 48 || c > 57) && (c < 65 || c > 90) && (c < 97 || c > 122)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtConfirmPasswordKeyTyped
+
+    private void cbPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPuestoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,6 +392,8 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbNivel;
+    private javax.swing.JComboBox<String> cbPuesto;
     private javax.swing.JCheckBox chbAgree;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator4;
@@ -362,8 +411,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBtnSignUp;
     private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtNivel;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtPuesto;
     // End of variables declaration//GEN-END:variables
 }

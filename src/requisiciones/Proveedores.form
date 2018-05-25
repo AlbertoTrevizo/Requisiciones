@@ -822,6 +822,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEstadoMActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -1117,6 +1120,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtProveedorE">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="41" green="2f" red="24" type="rgb"/>
                     </Property>
@@ -1143,6 +1147,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNombreE">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="41" green="2f" red="24" type="rgb"/>
                     </Property>
@@ -1163,6 +1168,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDireccionE">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="41" green="2f" red="24" type="rgb"/>
                     </Property>
@@ -1191,6 +1197,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTelefonoE">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="41" green="2f" red="24" type="rgb"/>
                     </Property>
@@ -1203,6 +1210,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFormaPagoE">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="41" green="2f" red="24" type="rgb"/>
                     </Property>
@@ -1223,6 +1231,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtRFCE">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="41" green="2f" red="24" type="rgb"/>
                     </Property>
